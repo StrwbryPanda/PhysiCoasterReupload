@@ -43,28 +43,48 @@ public class GridManager : MonoBehaviour
         CheckMouseLocation();
         if (pieceSelected)
         {
-            if (Input.GetKeyUp("mouse 0"))
-            {
-                //once the left mouse button is released, check if a piece can be placed at the tile corresponding to mouse's position
-                int x = FindIndexX(mouseLocationWorldSpace);
-                int y = FindIndexY(mouseLocationWorldSpace);
-                if(x >= 0 && y >= 0)
+            if (numberAvailable[indexSelected] != 0)
+            { 
+                if (Input.GetKeyUp("mouse 0"))
                 {
-                    if (CheckCanBePlaced(x, y))
+                    //once the left mouse button is released, check if a piece can be placed at the tile corresponding to mouse's position
+                    int x = FindIndexX(mouseLocationWorldSpace);
+                    int y = FindIndexY(mouseLocationWorldSpace);
+                    if (x >= 0 && y >= 0)
                     {
-                        //check if the tile does not contain an obstacle
-                        if (contents[x, y] == 2)
+                        if (CheckCanBePlaced(x, y))
                         {
-                            //then check if the space is occupied by another piece already
+                            //check if the tile does not contain an obstacle
+                            if (contents[x, y] == 2)
+                            {
+                                //then check if the space is occupied by another piece already
 
-                        }
-                        else
-                        {
-                            PlacePiece(x, y);
+                            }
+                            else
+                            {
+                                PlacePiece(x, y);
+                            }
                         }
                     }
                 }
                 
+            }
+        }
+
+        if(Input.GetKeyUp("mouse 1"))
+        {
+            //when right click is done while over a piece it will remove the piece and refund the piece to the inventory
+            //Debug.Log("right click detected");
+            int x = FindIndexX(mouseLocationWorldSpace);
+            int y = FindIndexY(mouseLocationWorldSpace);
+            //Debug.Log(contents[x, y]);
+            if (contents[x, y] == 2)
+            {
+                //Debug.Log("Contents = 2");
+                GameObject piece = piecesPlaced[x, y];
+                AddPieceToAvailablePieces(piece);
+                Destroy(piecesPlaced[x,y]);
+                DestroyPiece(x, y);
             }
         }
     }
@@ -201,11 +221,12 @@ public class GridManager : MonoBehaviour
             Destroy(piecesPlaced[x, y]);
         }
         piecesPlaced[x, y] = go;
+        contents[x, y] = 2;
         RemovePieceFromAvailablePieces(availablePieces[indexSelected]);
-        if (numberAvailable[indexSelected] == 0)
-        {
-            pieceSelected = false;
-        }
         //Debug.Log("placing selected piece:" + availablePieces[indexSelected].name + " at: X: " + x + ", Y: " + y);
+    }
+    public void DestroyPiece(int x, int y)
+    {
+        contents[x, y] = 0;
     }
 }
