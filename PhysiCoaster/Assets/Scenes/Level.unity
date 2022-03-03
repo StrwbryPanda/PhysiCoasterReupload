@@ -207,7 +207,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2045683540}
+      - m_Target: {fileID: 968532455}
         m_TargetAssemblyTypeName: GridManager, Assembly-CSharp
         m_MethodName: SelectPiece
         m_Mode: 3
@@ -322,7 +322,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &968532450
 GameObject:
@@ -336,8 +336,9 @@ GameObject:
   - component: {fileID: 968532453}
   - component: {fileID: 968532452}
   - component: {fileID: 968532451}
-  m_Layer: 0
-  m_Name: Plane
+  - component: {fileID: 968532455}
+  m_Layer: 1
+  m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +378,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 84a099cf1fffbb348b1fd906e57d0285, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -415,13 +416,39 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968532450}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 40, y: 1.2026669, z: 7.4}
-  m_LocalScale: {x: 20, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 0.8}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &968532455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968532450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5425748157ffd47be4bdea93b0af3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridAnchor: {x: 0, y: 0, z: 0}
+  gridSizeX: 20
+  gridSizeY: 8
+  gridScale: 1
+  pieceSelected: 0
+  indexSelected: 0
+  availablePieces:
+  - {fileID: 8672125454909380715, guid: bcb4c1b6b4de17b43b5e5836c7df1b70, type: 3}
+  - {fileID: 7562165865590369198, guid: b5644d7e1559b0c4cbbe9aec9fe7e06a, type: 3}
+  numberAvailable: 0500000003000000
+  mouseLocationWorldSpace: {x: 0, y: 0, z: 0}
+  dragging: 0
+  watchingForStartDrag: 0
+  minDistanceToStartDrag: 0.1
 --- !u!1 &1038645508
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8924520976669801970, guid: a0817a47e1d12a544bfb0edd6cfb06d7, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8924520976669801970, guid: a0817a47e1d12a544bfb0edd6cfb06d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -572,7 +599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8924520976669801970, guid: a0817a47e1d12a544bfb0edd6cfb06d7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8924520976669801970, guid: a0817a47e1d12a544bfb0edd6cfb06d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -700,7 +727,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2045683540}
+      - m_Target: {fileID: 968532455}
         m_TargetAssemblyTypeName: GridManager, Assembly-CSharp
         m_MethodName: SelectPiece
         m_Mode: 3
@@ -1021,17 +1048,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e639721b3ceb76f4ab10163a0cac4b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initPosition: {x: 8, y: 4, z: -10}
+  initPosition: {x: 8, y: 5, z: -10}
   mode: 0
   xBoundsLeft: 8
-  xBoundsRight: 20
-  yBoundsUp: 4
-  yBoundsDown: 4
+  xBoundsRight: 12
+  yBoundsUp: 8
+  yBoundsDown: 0
   horizontalScrollEnabled: 1
   VerticalScrollEnabled: 0
   scrollSpeed: 5
-  scrollBoundaryLeft: 10
-  scrollBoundaryRight: 10
+  scrollBoundaryLeft: 9
+  scrollBoundaryRight: 9
   scrollBoundaryUp: 0
   ScrollBoundaryDown: 0
   mouseLocationWorldSpace: {x: 0, y: 0, z: 0}
@@ -1130,65 +1157,10 @@ RectTransform:
   - {fileID: 1664319203}
   - {fileID: 124530654}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &2045683539
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2045683541}
-  - component: {fileID: 2045683540}
-  m_Layer: 0
-  m_Name: Grid Placement Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2045683540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045683539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef5425748157ffd47be4bdea93b0af3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridAnchor: {x: 0, y: 0, z: 0}
-  gridSizeX: 20
-  gridSizeY: 8
-  gridScale: 1
-  pieceSelected: 0
-  indexSelected: 0
-  availablePieces:
-  - {fileID: 8672125454909380715, guid: bcb4c1b6b4de17b43b5e5836c7df1b70, type: 3}
-  - {fileID: 7562165865590369198, guid: b5644d7e1559b0c4cbbe9aec9fe7e06a, type: 3}
-  numberAvailable: 0500000003000000
-  mouseLocationWorldSpace: {x: 0, y: 0, z: 0}
---- !u!4 &2045683541
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045683539}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

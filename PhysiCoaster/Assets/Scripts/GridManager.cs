@@ -17,9 +17,24 @@ public class GridManager : MonoBehaviour
     public GameObject[] availablePieces;
     public int[] numberAvailable;
     public Vector3 mouseLocationWorldSpace;
+    private GameObject grid;
+    private float xPos;
+    private float yPos;
+    Renderer render;
+    public bool dragging;
+    public bool watchingForStartDrag;
+    private GameObject pieceToBeMoved;
+    private GameObject ghostOfPieceToBeMoved;
+    private Vector3 startedDragHere;
+    public float minDistanceToStartDrag;
     // Start is called before the first frame update
     void Start()
     {
+        grid = gameObject;
+        grid.transform.localScale = new Vector3(((float)gridSizeX) / (float)10.0, (float)1.0,((float)gridSizeY) / (float)10.0);
+        this.transform.position = new Vector3(gridAnchor.x + (((float)gridSizeX) / (float)2.0), gridAnchor.y + (((float)gridSizeY) / (float)2.0), 0.0f);
+        render = GetComponent<Renderer>();
+        render.material.mainTextureScale = new Vector2((float)gridSizeX, (float)gridSizeY);
         //initialize contents and set all to empty = 0
         contents = new int[gridSizeX, gridSizeY];
         piecesPlaced = new GameObject[gridSizeX, gridSizeY];
@@ -41,33 +56,128 @@ public class GridManager : MonoBehaviour
     {
         
         CheckMouseLocation();
+        int x = FindIndexX(mouseLocationWorldSpace);
+        int y = FindIndexY(mouseLocationWorldSpace);
+
+        if (watchingForStartDrag)
+        {
+            if (Math.Abs(Vector3.Distance(startedDragHere,mouseLocationWorldSpace)) > minDistanceToStartDrag)
+            {
+                dragging = true;
+                watchingForStartDrag = false;
+                pieceToBeMoved = piecesPlaced[x, y];
+                string trueName = pieceToBeMoved.name.Substring(0, pieceToBeMoved.name.Length - 7);
+                ghostOfPieceToBeMoved = (GameObject)Instantiate(Resources.Load(trueName+" Ghost"), mouseLocationWorldSpace, Quaternion.identity);
+            }
+            else if(Input.GetKeyUp("mouse 0"))
+            {
+                watchingForStartDrag = false;
+            }
+        }
+
+        if (Input.GetKeyDown("mouse 0"))
+        {
+
+            if (CheckCanBePlaced(x,y))//update this later to add drag zones outside of the grid
+            {
+                if (contents[x, y] == 2)
+                {
+                    watchingForStartDrag = true;
+                    startedDragHere = mouseLocationWorldSpace;
+                }
+            }
+        }
+
         if (pieceSelected)
         {
             if (numberAvailable[indexSelected] != 0)
-            { 
-                if (Input.GetKeyUp("mouse 0"))
+            {
+                if (Input.GetKeyUp("mouse 0") && !dragging)
                 {
                     //once the left mouse button is released, check if a piece can be placed at the tile corresponding to mouse's position
-                    int x = FindIndexX(mouseLocationWorldSpace);
-                    int y = FindIndexY(mouseLocationWorldSpace);
                     if (x >= 0 && y >= 0)
                     {
                         if (CheckCanBePlaced(x, y))
                         {
-                            //check if the tile does not contain an obstacle
-                            if (contents[x, y] == 2)
-                            {
-                                //then check if the space is occupied by another piece already
-
-                            }
-                            else
-                            {
-                                PlacePiece(x, y);
-                            }
+                            //place the piece at x,y
+                            PlacePiece(x, y);
                         }
                     }
                 }
-                
+
+            }
+        }
+
+        //check if the mouse is within the grid
+        if (mouseLocationWorldSpace.x < gridAnchor.x || mouseLocationWorldSpace.x > gridAnchor.x + (float)gridSizeX || mouseLocationWorldSpace.y < gridAnchor.y || mouseLocationWorldSpace.y > gridAnchor.y + (float)gridSizeY)
+        {
+            //Debug.Log("Out of bounds!!!");
+            Color c = render.material.color;
+            c.a = 0;
+            render.material.color = c;
+
+            if (dragging)
+            {
+                //set piece ghostpiece location to mouselocation
+                Vector3 targetPosition = mouseLocationWorldSpace;
+                ghostOfPieceToBeMoved.transform.position = targetPosition;
+                if(Input.GetKeyUp("mouse 0"))
+                {
+                    Destroy(ghostOfPieceToBeMoved);
+                    dragging = false;
+                    contents[FindIndexX(startedDragHere), FindIndexY(startedDragHere)] = 0;
+                    AddPieceToAvailablePieces(pieceToBeMoved);
+                    Destroy(piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)]);
+                    Destroy(pieceToBeMoved);
+
+                }
+            }
+
+        }
+        else
+        {
+            //Debug.Log("Safe!!!");
+            Color c = render.material.color;
+            c.a = 1;
+            render.material.color = c;
+
+            if (dragging)
+            {
+                //set ghostpiece location to current tile
+                float xOffset = pieceToBeMoved.GetComponent<GridObjects>().xOffset;
+                float yOffset = pieceToBeMoved.GetComponent<GridObjects>().yOffset;
+                Vector3 targetPosition = new Vector3(gridAnchor.x + (x * gridScale) + (gridScale / 2.0f) + xOffset, gridAnchor.y + (y * gridScale) + (gridScale / 2.0f) + yOffset, 0.0f);
+                ghostOfPieceToBeMoved.transform.position = targetPosition;
+                if(Input.GetKeyUp("mouse 0"))
+                {
+                    if (CheckCanBePlaced(x, y))
+                    {
+                        if (contents[x, y] == 2)
+                        {
+                            GameObject g = piecesPlaced[x, y];
+                            Debug.Log(g.name);
+                            AddPieceToAvailablePieces(g);
+                            
+                            Destroy(g);
+                        }
+                        
+                        string trueName = pieceToBeMoved.name.Substring(0, pieceToBeMoved.name.Length - 7);
+                        GameObject go = (GameObject)Instantiate(Resources.Load(trueName), targetPosition, Quaternion.identity);
+                        piecesPlaced[x, y] = go;
+                        contents[FindIndexX(startedDragHere), FindIndexY(startedDragHere)] = 0;
+                        contents[x, y] = 2;
+                        Destroy(ghostOfPieceToBeMoved);
+                        Debug.Log(pieceToBeMoved.name);
+                        Destroy(piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)]);
+                        Destroy(pieceToBeMoved);
+                        dragging = false;
+                    }
+                    else
+                    {
+                        Destroy(ghostOfPieceToBeMoved);
+                        dragging = false;
+                    }
+                }
             }
         }
 
@@ -75,8 +185,6 @@ public class GridManager : MonoBehaviour
         {
             //when right click is done while over a piece it will remove the piece and refund the piece to the inventory
             //Debug.Log("right click detected");
-            int x = FindIndexX(mouseLocationWorldSpace);
-            int y = FindIndexY(mouseLocationWorldSpace);
             //Debug.Log(contents[x, y]);
             if (contents[x, y] == 2)
             {
@@ -158,7 +266,15 @@ public class GridManager : MonoBehaviour
 
     public bool CheckCanBePlaced(int x, int y)
     {
-        if (contents[x, y]!=1)//if the tile does not contain an obstacle
+        if (x == 0 || x == gridSizeX - 1)
+        {
+            return false;
+        }
+        else if ((x >= gridSizeX || y >= gridSizeY)||(x < 0|| y <0))
+        {
+            return false;
+        }
+        else if (contents[x, y]!=1)//if the tile does not contain an obstacle
         {
             return true;
         }
@@ -166,6 +282,7 @@ public class GridManager : MonoBehaviour
         {
             return false;
         }
+
     }
 
     public void AddPieceToAvailablePieces(GameObject g)
@@ -173,7 +290,7 @@ public class GridManager : MonoBehaviour
         string trueName = g.name.Substring(0, g.name.Length - 7);
         for(int i=0; i<availablePieces.Length; i++)
         {
-            Debug.Log("availablePieces[i].name: " + availablePieces[i].name+ ", g.name: "+ trueName);
+            //Debug.Log("availablePieces[i].name: " + availablePieces[i].name+ ", g.name: "+ trueName);
             if (availablePieces[i].name == trueName)
             {
                 numberAvailable[i]++;
@@ -228,5 +345,9 @@ public class GridManager : MonoBehaviour
     public void DestroyPiece(int x, int y)
     {
         contents[x, y] = 0;
+        if (watchingForStartDrag)
+        {
+            watchingForStartDrag = false;
+        }
     }
 }
