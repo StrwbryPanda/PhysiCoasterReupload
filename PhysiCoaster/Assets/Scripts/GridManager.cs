@@ -150,7 +150,7 @@ public class GridManager : MonoBehaviour
                 ghostOfPieceToBeMoved.transform.position = targetPosition;
                 if(Input.GetKeyUp("mouse 0"))
                 {
-                    if (CheckCanBePlaced(x, y))
+                    if (CheckCanBePlaced(x, y)&&!(x== FindIndexX(startedDragHere)&&y== FindIndexY(startedDragHere)))
                     {
                         if (contents[x, y] == 2)
                         {
