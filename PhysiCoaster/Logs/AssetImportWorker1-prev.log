@@ -16,11 +16,7 @@ C:/Users/kylie/GitHub/PhysiCoaster/PhysiCoaster
 Logs/AssetImportWorker1.log
 -srvPort
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 61125
-=======
-53597
->>>>>>> Stashed changes
 Successfully changed project path to: C:/Users/kylie/GitHub/PhysiCoaster/PhysiCoaster
 C:/Users/kylie/GitHub/PhysiCoaster/PhysiCoaster
 =======
@@ -64,7 +60,6 @@ C:/Users/kylie/GitHub/PhysiCoaster/PhysiCoaster
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Refreshing native plugins compatible for Editor in 50.96 ms, found 3 plugins.
 =======
 <<<<<<< HEAD
@@ -72,9 +67,6 @@ Refreshing native plugins compatible for Editor in 76.88 ms, found 3 plugins.
 =======
 Refreshing native plugins compatible for Editor in 59.51 ms, found 3 plugins.
 >>>>>>> 0078327364fd7c70e45a8a3d4785707031df6cab
->>>>>>> Stashed changes
-=======
-Refreshing native plugins compatible for Editor in 59.51 ms, found 3 plugins.
 >>>>>>> Stashed changes
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.2.10f1 (ee872746220e)
@@ -92,22 +84,17 @@ Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.2.10f1/Editor/Data/Manage
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.2.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.2.10f1/Editor/Data/MonoBleedingEdge/etc'
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56548
-=======
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56196
->>>>>>> Stashed changes
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.005962 seconds.
+Registered in 0.005987 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 64.04 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 50.79 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.453 seconds
+- Completed reload, in  0.420 seconds
 Domain Reload Profiling:
-<<<<<<< Updated upstream
 	ReloadAssembly (420ms)
 		BeginReloadAssembly (51ms)
 =======
@@ -142,29 +129,24 @@ Domain Reload Profiling:
 		BeginReloadAssembly (56ms)
 >>>>>>> 0078327364fd7c70e45a8a3d4785707031df6cab
 >>>>>>> Stashed changes
-=======
-	ReloadAssembly (454ms)
-		BeginReloadAssembly (56ms)
->>>>>>> Stashed changes
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 <<<<<<< Updated upstream
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (338ms)
-			LoadAssemblies (51ms)
+		EndReloadAssembly (311ms)
+			LoadAssemblies (49ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (69ms)
+			SetupTypeCache (64ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (18ms)
-			SetupLoadedEditorAssemblies (212ms)
+			RebuildScriptCaches (17ms)
+			SetupLoadedEditorAssemblies (193ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (12ms)
+				InitializePlatformSupportModulesInManaged (11ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (64ms)
+				RefreshPlugins (51ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-<<<<<<< Updated upstream
 				ProcessInitializeOnLoadAttributes (100ms)
 				ProcessInitializeOnLoadMethodAttributes (31ms)
 =======
@@ -202,17 +184,12 @@ Domain Reload Profiling:
 				ProcessInitializeOnLoadMethodAttributes (32ms)
 >>>>>>> 0078327364fd7c70e45a8a3d4785707031df6cab
 >>>>>>> Stashed changes
-=======
-				ProcessInitializeOnLoadAttributes (103ms)
-				ProcessInitializeOnLoadMethodAttributes (32ms)
->>>>>>> Stashed changes
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 Registered in 0.005060 seconds.
 =======
@@ -222,24 +199,16 @@ Registered in 0.006364 seconds.
 Registered in 0.004897 seconds.
 >>>>>>> 0078327364fd7c70e45a8a3d4785707031df6cab
 >>>>>>> Stashed changes
-=======
-Registered in 0.004897 seconds.
->>>>>>> Stashed changes
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Refreshing native plugins compatible for Editor in 0.47 ms, found 3 plugins.
-=======
-Refreshing native plugins compatible for Editor in 0.46 ms, found 3 plugins.
->>>>>>> Stashed changes
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.696 seconds
+- Completed reload, in  0.678 seconds
 Domain Reload Profiling:
-<<<<<<< Updated upstream
 	ReloadAssembly (678ms)
 		BeginReloadAssembly (79ms)
 =======
@@ -262,40 +231,29 @@ Domain Reload Profiling:
 		BeginReloadAssembly (80ms)
 >>>>>>> 0078327364fd7c70e45a8a3d4785707031df6cab
 >>>>>>> Stashed changes
-=======
-	ReloadAssembly (697ms)
-		BeginReloadAssembly (80ms)
->>>>>>> Stashed changes
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 			CreateAndSetChildDomain (14ms)
 		EndReloadAssembly (531ms)
 			LoadAssemblies (55ms)
-=======
-			CreateAndSetChildDomain (15ms)
-		EndReloadAssembly (546ms)
-			LoadAssemblies (53ms)
->>>>>>> Stashed changes
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (167ms)
+			SetupTypeCache (161ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (32ms)
-			SetupLoadedEditorAssemblies (267ms)
+			RebuildScriptCaches (31ms)
+			SetupLoadedEditorAssemblies (258ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (9ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (0ms)
-				BeforeProcessingInitializeOnLoad (60ms)
-				ProcessInitializeOnLoadAttributes (173ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (59ms)
+				ProcessInitializeOnLoadAttributes (166ms)
 				ProcessInitializeOnLoadMethodAttributes (16ms)
-				AfterProcessingInitializeOnLoad (7ms)
+				AfterProcessingInitializeOnLoad (8ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-<<<<<<< Updated upstream
 			AwakeInstancesAfterBackupRestoration (4ms)
 =======
 <<<<<<< HEAD
@@ -328,24 +286,16 @@ Domain Reload Profiling:
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (5ms)
 >>>>>>> Stashed changes
-=======
-			AwakeInstancesAfterBackupRestoration (5ms)
->>>>>>> Stashed changes
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Refreshing native plugins compatible for Editor in 0.51 ms, found 3 plugins.
-=======
-Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
->>>>>>> Stashed changes
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3233 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (55.8 KB). Loaded Objects now: 3692.
+Unloading 24 unused Assets / (55.9 KB). Loaded Objects now: 3692.
 Memory consumption went from 114.3 MB to 114.2 MB.
-<<<<<<< Updated upstream
 Total: 2.280600 ms (FindLiveObjects: 0.208200 ms CreateObjectMapping: 0.070000 ms MarkObjects: 1.945700 ms  DeleteObjects: 0.055800 ms)
 =======
 Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
@@ -353,9 +303,6 @@ Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3233 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 24 unused Assets / (55.8 KB). Loaded Objects now: 3692.
 Memory consumption went from 114.3 MB to 114.2 MB.
-Total: 2.217100 ms (FindLiveObjects: 0.179500 ms CreateObjectMapping: 0.068600 ms MarkObjects: 1.922300 ms  DeleteObjects: 0.046100 ms)
->>>>>>> Stashed changes
-=======
 Total: 2.217100 ms (FindLiveObjects: 0.179500 ms CreateObjectMapping: 0.068600 ms MarkObjects: 1.922300 ms  DeleteObjects: 0.046100 ms)
 >>>>>>> Stashed changes
 
@@ -371,7 +318,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Received Import Request.
   Time since last request: 474588.958466 seconds.
   path: Assets
@@ -386,26 +332,16 @@ Received Prepare
 Registering precompiled user dll's ...
 Registered in 0.004555 seconds.
 >>>>>>> Stashed changes
-=======
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.004555 seconds.
->>>>>>> Stashed changes
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
-=======
-Refreshing native plugins compatible for Editor in 0.49 ms, found 3 plugins.
->>>>>>> Stashed changes
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.721 seconds
+- Completed reload, in  0.664 seconds
 Domain Reload Profiling:
-<<<<<<< Updated upstream
 	ReloadAssembly (665ms)
 		BeginReloadAssembly (99ms)
 =======
@@ -417,33 +353,23 @@ Domain Reload Profiling:
 	ReloadAssembly (721ms)
 		BeginReloadAssembly (102ms)
 >>>>>>> Stashed changes
-=======
-	ReloadAssembly (721ms)
-		BeginReloadAssembly (102ms)
->>>>>>> Stashed changes
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (26ms)
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 		EndReloadAssembly (498ms)
 			LoadAssemblies (56ms)
-=======
-		EndReloadAssembly (544ms)
-			LoadAssemblies (59ms)
->>>>>>> Stashed changes
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (180ms)
+			SetupTypeCache (160ms)
 			ReleaseScriptCaches (1ms)
 			RebuildScriptCaches (27ms)
-			SetupLoadedEditorAssemblies (244ms)
+			SetupLoadedEditorAssemblies (226ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (10ms)
+				InitializePlatformSupportModulesInManaged (9ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-<<<<<<< Updated upstream
 				BeforeProcessingInitializeOnLoad (48ms)
 				ProcessInitializeOnLoadAttributes (145ms)
 				ProcessInitializeOnLoadMethodAttributes (16ms)
@@ -460,26 +386,17 @@ Domain Reload Profiling:
 				InitializePlatformSupportModulesInManaged (10ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-=======
->>>>>>> Stashed changes
 				BeforeProcessingInitializeOnLoad (52ms)
 				ProcessInitializeOnLoadAttributes (156ms)
 				ProcessInitializeOnLoadMethodAttributes (17ms)
 				AfterProcessingInitializeOnLoad (9ms)
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
 Platform modules already initialized, skipping
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
-=======
-Refreshing native plugins compatible for Editor in 0.49 ms, found 3 plugins.
->>>>>>> Stashed changes
 =======
 Refreshing native plugins compatible for Editor in 0.49 ms, found 3 plugins.
 >>>>>>> Stashed changes
@@ -488,11 +405,7 @@ Unloading 3213 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 19 unused Assets / (24.6 KB). Loaded Objects now: 3694.
 Memory consumption went from 112.8 MB to 112.7 MB.
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Total: 2.375300 ms (FindLiveObjects: 0.217800 ms CreateObjectMapping: 0.125300 ms MarkObjects: 2.012400 ms  DeleteObjects: 0.019100 ms)
-=======
-Total: 2.164000 ms (FindLiveObjects: 0.192600 ms CreateObjectMapping: 0.070200 ms MarkObjects: 1.886200 ms  DeleteObjects: 0.014400 ms)
->>>>>>> Stashed changes
 =======
 Total: 2.164000 ms (FindLiveObjects: 0.192600 ms CreateObjectMapping: 0.070200 ms MarkObjects: 1.886200 ms  DeleteObjects: 0.014400 ms)
 >>>>>>> Stashed changes
@@ -511,11 +424,7 @@ AssetImportParameters requested are different than current active one (requested
 Received Prepare
 Registering precompiled user dll's ...
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Registered in 0.005227 seconds.
-=======
-Registered in 0.004640 seconds.
->>>>>>> Stashed changes
 =======
 Registered in 0.004640 seconds.
 >>>>>>> Stashed changes
@@ -524,16 +433,11 @@ Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoas
 Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Refreshing native plugins compatible for Editor in 0.56 ms, found 3 plugins.
-=======
-Refreshing native plugins compatible for Editor in 0.50 ms, found 3 plugins.
->>>>>>> Stashed changes
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.724 seconds
+- Completed reload, in  0.689 seconds
 Domain Reload Profiling:
-<<<<<<< Updated upstream
 	ReloadAssembly (690ms)
 =======
 Refreshing native plugins compatible for Editor in 0.50 ms, found 3 plugins.
@@ -543,9 +447,6 @@ Mono: successfully reloaded assembly
 Domain Reload Profiling:
 	ReloadAssembly (724ms)
 >>>>>>> Stashed changes
-=======
-	ReloadAssembly (724ms)
->>>>>>> Stashed changes
 		BeginReloadAssembly (99ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
@@ -553,36 +454,31 @@ Domain Reload Profiling:
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (25ms)
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 		EndReloadAssembly (519ms)
 			LoadAssemblies (57ms)
-=======
-		EndReloadAssembly (555ms)
-			LoadAssemblies (55ms)
->>>>>>> Stashed changes
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (188ms)
+			SetupTypeCache (167ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (29ms)
-			SetupLoadedEditorAssemblies (249ms)
+			RebuildScriptCaches (26ms)
+			SetupLoadedEditorAssemblies (234ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (10ms)
-				SetLoadedEditorAssemblies (0ms)
+				InitializePlatformSupportModulesInManaged (11ms)
+				SetLoadedEditorAssemblies (1ms)
 				RefreshPlugins (1ms)
 				BeforeProcessingInitializeOnLoad (50ms)
-				ProcessInitializeOnLoadAttributes (163ms)
-				ProcessInitializeOnLoadMethodAttributes (17ms)
-				AfterProcessingInitializeOnLoad (8ms)
+				ProcessInitializeOnLoadAttributes (149ms)
+				ProcessInitializeOnLoadMethodAttributes (16ms)
+				AfterProcessingInitializeOnLoad (7ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.49 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3213 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 19 unused Assets / (24.5 KB). Loaded Objects now: 3696.
+Unloading 19 unused Assets / (24.6 KB). Loaded Objects now: 3696.
 Memory consumption went from 112.8 MB to 112.7 MB.
-Total: 2.346800 ms (FindLiveObjects: 0.230100 ms CreateObjectMapping: 0.100200 ms MarkObjects: 1.999500 ms  DeleteObjects: 0.015900 ms)
+Total: 2.187300 ms (FindLiveObjects: 0.193300 ms CreateObjectMapping: 0.112800 ms MarkObjects: 1.867300 ms  DeleteObjects: 0.013200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -597,7 +493,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.004655 seconds.
+Registered in 0.005017 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
@@ -605,40 +501,39 @@ Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.49 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.725 seconds
+- Completed reload, in  0.662 seconds
 Domain Reload Profiling:
-	ReloadAssembly (726ms)
-		BeginReloadAssembly (105ms)
+	ReloadAssembly (663ms)
+		BeginReloadAssembly (101ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (28ms)
-		EndReloadAssembly (543ms)
-			LoadAssemblies (59ms)
+		EndReloadAssembly (495ms)
+			LoadAssemblies (55ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (174ms)
+			SetupTypeCache (156ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (28ms)
-			SetupLoadedEditorAssemblies (252ms)
+			RebuildScriptCaches (25ms)
+			SetupLoadedEditorAssemblies (228ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (10ms)
+				InitializePlatformSupportModulesInManaged (9ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (51ms)
-				ProcessInitializeOnLoadAttributes (163ms)
-				ProcessInitializeOnLoadMethodAttributes (18ms)
-				AfterProcessingInitializeOnLoad (9ms)
+				BeforeProcessingInitializeOnLoad (46ms)
+				ProcessInitializeOnLoadAttributes (148ms)
+				ProcessInitializeOnLoadMethodAttributes (16ms)
+				AfterProcessingInitializeOnLoad (8ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.49 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.68 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3213 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 19 unused Assets / (24.6 KB). Loaded Objects now: 3698.
 Memory consumption went from 112.8 MB to 112.7 MB.
-<<<<<<< Updated upstream
 Total: 2.327200 ms (FindLiveObjects: 0.201300 ms CreateObjectMapping: 0.074700 ms MarkObjects: 2.037200 ms  DeleteObjects: 0.013100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
@@ -724,9 +619,6 @@ Unloading 19 unused Assets / (24.5 KB). Loaded Objects now: 3696.
 Memory consumption went from 112.8 MB to 112.7 MB.
 Total: 2.346800 ms (FindLiveObjects: 0.230100 ms CreateObjectMapping: 0.100200 ms MarkObjects: 1.999500 ms  DeleteObjects: 0.015900 ms)
 >>>>>>> Stashed changes
-=======
-Total: 2.257900 ms (FindLiveObjects: 0.202100 ms CreateObjectMapping: 0.113400 ms MarkObjects: 1.926900 ms  DeleteObjects: 0.014400 ms)
->>>>>>> Stashed changes
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -742,29 +634,20 @@ AssetImportParameters requested are different than current active one (requested
 Received Prepare
 Registering precompiled user dll's ...
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Registered in 0.004988 seconds.
 =======
 Registered in 0.004655 seconds.
->>>>>>> Stashed changes
-=======
-Registered in 0.005426 seconds.
 >>>>>>> Stashed changes
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Refreshing native plugins compatible for Editor in 0.50 ms, found 3 plugins.
-=======
-Refreshing native plugins compatible for Editor in 0.47 ms, found 3 plugins.
->>>>>>> Stashed changes
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.718 seconds
+- Completed reload, in  0.672 seconds
 Domain Reload Profiling:
-<<<<<<< Updated upstream
 	ReloadAssembly (673ms)
 		BeginReloadAssembly (97ms)
 =======
@@ -776,36 +659,137 @@ Domain Reload Profiling:
 	ReloadAssembly (726ms)
 		BeginReloadAssembly (105ms)
 >>>>>>> Stashed changes
-=======
-	ReloadAssembly (718ms)
-		BeginReloadAssembly (107ms)
->>>>>>> Stashed changes
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 			CreateAndSetChildDomain (24ms)
 		EndReloadAssembly (506ms)
 			LoadAssemblies (58ms)
-=======
-			CreateAndSetChildDomain (32ms)
-		EndReloadAssembly (539ms)
-			LoadAssemblies (57ms)
->>>>>>> Stashed changes
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (179ms)
+			SetupTypeCache (160ms)
 			ReleaseScriptCaches (1ms)
 			RebuildScriptCaches (27ms)
-			SetupLoadedEditorAssemblies (243ms)
+			SetupLoadedEditorAssemblies (232ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (10ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (51ms)
+				BeforeProcessingInitializeOnLoad (49ms)
+				ProcessInitializeOnLoadAttributes (148ms)
+				ProcessInitializeOnLoadMethodAttributes (16ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3213 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 19 unused Assets / (24.6 KB). Loaded Objects now: 3702.
+Memory consumption went from 112.8 MB to 112.8 MB.
+Total: 2.404100 ms (FindLiveObjects: 0.210400 ms CreateObjectMapping: 0.123100 ms MarkObjects: 2.055300 ms  DeleteObjects: 0.014700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005090 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.42 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.667 seconds
+Domain Reload Profiling:
+	ReloadAssembly (668ms)
+		BeginReloadAssembly (97ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (24ms)
+		EndReloadAssembly (502ms)
+			LoadAssemblies (57ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (161ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (25ms)
+			SetupLoadedEditorAssemblies (228ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (9ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (0ms)
+				BeforeProcessingInitializeOnLoad (47ms)
+				ProcessInitializeOnLoadAttributes (147ms)
+				ProcessInitializeOnLoadMethodAttributes (16ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3213 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 19 unused Assets / (24.6 KB). Loaded Objects now: 3704.
+Memory consumption went from 112.8 MB to 112.8 MB.
+Total: 2.317100 ms (FindLiveObjects: 0.193900 ms CreateObjectMapping: 0.115300 ms MarkObjects: 1.992700 ms  DeleteObjects: 0.014700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005176 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\kylie\GitHub\PhysiCoaster\PhysiCoaster\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.49 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.682 seconds
+Domain Reload Profiling:
+	ReloadAssembly (683ms)
+		BeginReloadAssembly (99ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (24ms)
+		EndReloadAssembly (513ms)
+			LoadAssemblies (59ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (161ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (26ms)
+			SetupLoadedEditorAssemblies (238ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (9ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (48ms)
 				ProcessInitializeOnLoadAttributes (156ms)
-<<<<<<< Updated upstream
 				ProcessInitializeOnLoadMethodAttributes (16ms)
 				AfterProcessingInitializeOnLoad (7ms)
 =======
@@ -884,20 +868,15 @@ Domain Reload Profiling:
 				ProcessInitializeOnLoadAttributes (148ms)
 				ProcessInitializeOnLoadMethodAttributes (16ms)
 				AfterProcessingInitializeOnLoad (7ms)
-=======
-				ProcessInitializeOnLoadMethodAttributes (17ms)
-				AfterProcessingInitializeOnLoad (8ms)
->>>>>>> Stashed changes
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.74 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.47 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3213 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 19 unused Assets / (24.6 KB). Loaded Objects now: 3700.
+Unloading 19 unused Assets / (24.6 KB). Loaded Objects now: 3708.
 Memory consumption went from 112.8 MB to 112.8 MB.
-<<<<<<< Updated upstream
 Total: 2.400600 ms (FindLiveObjects: 0.202800 ms CreateObjectMapping: 0.138200 ms MarkObjects: 2.046600 ms  DeleteObjects: 0.012400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
@@ -2136,9 +2115,6 @@ Unloading 19 unused Assets / (24.6 KB). Loaded Objects now: 3700.
 Memory consumption went from 112.8 MB to 112.8 MB.
 Total: 2.364900 ms (FindLiveObjects: 0.197600 ms CreateObjectMapping: 0.103000 ms MarkObjects: 2.051300 ms  DeleteObjects: 0.012300 ms)
 >>>>>>> 0078327364fd7c70e45a8a3d4785707031df6cab
->>>>>>> Stashed changes
-=======
-Total: 2.364900 ms (FindLiveObjects: 0.197600 ms CreateObjectMapping: 0.103000 ms MarkObjects: 2.051300 ms  DeleteObjects: 0.012300 ms)
 >>>>>>> Stashed changes
 
 AssetImportParameters requested are different than current active one (requested -> active):

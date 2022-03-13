@@ -48,7 +48,7 @@ public class GridManager : MonoBehaviour
         
         //find obstacles in the scene and add them to the array. once save & load is added, make this run PopulateGrid after the scene is filled
         PopulateGrid();
-        //PrintContents();
+        PrintContents();
     }
 
     // Update is called once per frame
