@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8452392945180461961}
   - component: {fileID: 2584402345555564448}
   - component: {fileID: -5522446598123520043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rectangle Track
   m_TagString: Track
   m_Icon: {fileID: 0}

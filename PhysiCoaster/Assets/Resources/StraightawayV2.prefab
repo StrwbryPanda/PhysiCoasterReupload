@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4163332606405269832}
   - component: {fileID: 8698700441873760816}
   - component: {fileID: 5346509843963682332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StraightawayV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

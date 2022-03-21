@@ -350,8 +350,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cart: {fileID: 1422061748}
-  bottomHeight: 1.29
-  startingVelocity: 5
   kineticEnergyBar: {fileID: 802191490}
   potentialEnergyBar: {fileID: 1672073501}
   totalEnergyBar: {fileID: 1498803778}
@@ -1179,7 +1177,7 @@ MonoBehaviour:
   availablePieces:
   - {fileID: 3642550488981177330, guid: 4d98d7eb71bfc184bbab7c6517757f35, type: 3}
   - {fileID: 4003497618303916892, guid: 8f30b928951e3cb498c2aaae0a1be3cc, type: 3}
-  numberAvailable: 0c00000003000000
+  numberAvailable: 0400000007000000
   mouseLocationWorldSpace: {x: 0, y: 0, z: 0}
   dragging: 0
   watchingForStartDrag: 0
@@ -1676,6 +1674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube Obstacle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8497915338529115014, guid: a0817a47e1d12a544bfb0edd6cfb06d7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8924520976669801970, guid: a0817a47e1d12a544bfb0edd6cfb06d7, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1869,13 +1871,14 @@ GameObject:
   - component: {fileID: 1422061751}
   - component: {fileID: 1422061750}
   - component: {fileID: 1422061749}
+  - component: {fileID: 1422061754}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Cart Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &1422061749
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1884,13 +1887,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422061748}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 8
+  m_Constraints: 56
   m_CollisionDetection: 2
 --- !u!135 &1422061750
 SphereCollider:
@@ -1912,7 +1915,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422061748}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1963,13 +1966,143 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422061748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 8, z: 0}
+  m_LocalPosition: {x: 0.5, y: 7.895, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1444515109}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1422061754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422061748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01e7354ebfef8d4c899c9bfddf8f359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cartBody: {fileID: 1444515108}
+  currentMode: 0
+  startingKE: 2.5
+  kineticEnergy: 0
+  currentVelocity: 0
+  currentVelVector: {x: 0, y: 0, z: 0}
+  bottomHeight: 1.29
+  height: 0
+  potentialEnergy: 0
+  totalEnergy: 0
+  angleOfDecline: 0
+  castDistance: 0.4
+  mask:
+    serializedVersion: 2
+    m_Bits: 64
+  rideableSurfaceDetected: 0
+  debugging: 1
+  grounded: 0
+  colliderRadius: 0.25
+  stepCount: 4
+--- !u!1 &1444515108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1444515109}
+  - component: {fileID: 1444515112}
+  - component: {fileID: 1444515111}
+  - component: {fileID: 1444515110}
+  m_Layer: 0
+  m_Name: Placeholder Cart Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1444515109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444515108}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.7, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1422061753}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1444515110
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444515108}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1444515111
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444515108}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 995a0705ab8576f4b9f4bde0d132d2bd, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1444515112
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444515108}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1498803776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,6 +2405,10 @@ PrefabInstance:
     - target: {fileID: 8497915338529115014, guid: a0817a47e1d12a544bfb0edd6cfb06d7, type: 3}
       propertyPath: m_Name
       value: Cube Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497915338529115014, guid: a0817a47e1d12a544bfb0edd6cfb06d7, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8924520976669801970, guid: a0817a47e1d12a544bfb0edd6cfb06d7, type: 3}
       propertyPath: m_RootOrder

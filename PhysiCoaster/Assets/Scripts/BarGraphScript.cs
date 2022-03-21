@@ -9,8 +9,7 @@ public class BarGraphScript : MonoBehaviour
     private Rigidbody rb;
     private float mass;
     private float height;
-    public float bottomHeight;
-    public float startingVelocity;
+    private float bottomHeight;
     private float startingKinetic;
     private float potentialEnergy;
     private float totalEnergy;
@@ -26,19 +25,18 @@ public class BarGraphScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startingKinetic = cart.GetComponent<CartMovementScript>().startingKE;
+        bottomHeight = cart.GetComponent<CartMovementScript>().bottomHeight;
         rb = cart.GetComponent<Rigidbody>();
-        Vector3 vel = new Vector3(startingVelocity, 0.0f, 0.0f);
-        rb.velocity = vel;
-        mass = rb.mass;
-        startingKinetic = (float).5f * mass * startingVelocity * startingVelocity;
+        mass = rb.mass;     
         kert = kineticEnergyBar.rectTransform;
         pert = potentialEnergyBar.rectTransform;
         tert = totalEnergyBar.rectTransform;
         maxHeight = (int)tert.sizeDelta.y;
 
-        height = cart.transform.position.y - bottomHeight;
-        potentialEnergy = mass * (float)9.81 * height;
-        totalEnergy = startingKinetic + potentialEnergy;
+        height = cart.GetComponent<CartMovementScript>().height;
+        potentialEnergy = cart.GetComponent<CartMovementScript>().potentialEnergy;
+        totalEnergy = cart.GetComponent<CartMovementScript>().totalEnergy;
         kert.sizeDelta = new Vector2(barWidth, (startingKinetic) * (float)maxHeight);
         Debug.Log("TME: " + totalEnergy);
         Debug.Log("Initial KE: " + startingKinetic);
@@ -55,8 +53,7 @@ public class BarGraphScript : MonoBehaviour
 
     public void UpdatePEKE()
     {
-        height = cart.transform.position.y - bottomHeight;
-        potentialEnergy = mass * (float)9.81 * height;
+        potentialEnergy = cart.GetComponent<CartMovementScript>().potentialEnergy;
         float ratio = (potentialEnergy / totalEnergy);
         ratio = Mathf.Clamp(ratio, 0.0f, 1.0f);
         //Debug.Log(ratio);
