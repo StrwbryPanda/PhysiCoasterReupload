@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Failed : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.tag == "Player")
-            other.gameObject.transform.position = new Vector3(0.5f, 8.0f, 0.0f);
+        Debug.Log("collided");
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "Player")
+            collision.gameObject.transform.position = new Vector3(0.5f, 8.0f, 0.0f);
 
     }
 }
