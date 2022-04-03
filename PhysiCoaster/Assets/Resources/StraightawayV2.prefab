@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4163332606405269832}
   - component: {fileID: 8698700441873760816}
-  - component: {fileID: 5346509843963682332}
   m_Layer: 6
   m_Name: StraightawayV2
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3642550488981177330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.009, y: 0.009, z: 0.009}
+  m_LocalScale: {x: 0.9, y: 1.1, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1186020086089957106}
@@ -47,21 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goType: 2
-  xOffset: -0.1
-  yOffset: 0
---- !u!65 &5346509843963682332
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3642550488981177330}
-  m_Material: {fileID: 13400000, guid: 7ca6d0f6570f1364bb6f4b45f2625240, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 150, y: 45, z: 25}
-  m_Center: {x: 10, y: -7, z: 0}
+  xOffset: 0
+  yOffset: 0.04
+  tilesOccupied:
+  - {x: 0, y: 0}
+  - {x: 1, y: 0}
 --- !u!1 &5757459238877890934
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,6 +62,7 @@ GameObject:
   - component: {fileID: 1186020086089957106}
   - component: {fileID: 5401636151413063945}
   - component: {fileID: 1876736389583019552}
+  - component: {fileID: 9085351304953214812}
   m_Layer: 0
   m_Name: StraightawayV2
   m_TagString: Untagged
@@ -89,7 +79,7 @@ Transform:
   m_GameObject: {fileID: 5757459238877890934}
   m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4163332606405269832}
@@ -147,3 +137,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &9085351304953214812
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5757459238877890934}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4554808, y: 0.3983774, z: 0.14999999}
+  m_Center: {x: 0.10446307, y: -0.064188704, z: 0}

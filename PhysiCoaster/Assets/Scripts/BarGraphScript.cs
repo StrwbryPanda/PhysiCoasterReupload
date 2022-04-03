@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,8 @@ public class BarGraphScript : MonoBehaviour
     private RectTransform tert;
     public int maxHeight;
     public int barWidth;
-
+    public Text maxEnergyLabel;
+    public Text halfEnergyLabel;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,10 @@ public class BarGraphScript : MonoBehaviour
         height = cart.GetComponent<CartMovementScript>().height;
         potentialEnergy = cart.GetComponent<CartMovementScript>().potentialEnergy;
         totalEnergy = cart.GetComponent<CartMovementScript>().totalEnergy;
+        int max = (int)Mathf.Floor(totalEnergy);
+        int half = (int)(Mathf.Floor(totalEnergy / 2));
+        maxEnergyLabel.text = max.ToString()+" J";
+        halfEnergyLabel.text = half.ToString();
         kert.sizeDelta = new Vector2(barWidth, (startingKinetic) * (float)maxHeight);
         Debug.Log("TME: " + totalEnergy);
         Debug.Log("Initial KE: " + startingKinetic);

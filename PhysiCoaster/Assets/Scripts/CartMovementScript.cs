@@ -30,6 +30,9 @@ public class CartMovementScript : MonoBehaviour
     public bool rideableSurfaceDetected;
     public bool debugging;
     public bool grounded;
+    public bool jumping;
+    private float jumpStartTime;
+    public float minJumpTime;
     public float colliderRadius;
     public int stepCount;
     
@@ -80,9 +83,13 @@ public class CartMovementScript : MonoBehaviour
                 GetAngleBelowCart();
                 if (rideableSurfaceDetected&&grounded)
                 {
-                    //comment back in when detection and transition are complete
-                    SwitchCurrentMode(1); 
-                    currentVelocity = rb.velocity.magnitude;
+                    if (jumping && (Time.time - jumpStartTime > minJumpTime))
+                    {
+                        SwitchCurrentMode(1);
+                        currentVelocity = rb.velocity.magnitude;
+                        jumping = false;
+                    }
+                    
                 }
                 break;
         }
@@ -108,6 +115,11 @@ public class CartMovementScript : MonoBehaviour
         {
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * castDistance, Color.green);
             rideableSurfaceDetected = false;
+            if (!jumping)
+            {
+                jumping = true;
+                jumpStartTime = Time.time;
+            }
             if ((int)currentMode != 2)
             {
                 SwitchCurrentMode(2);

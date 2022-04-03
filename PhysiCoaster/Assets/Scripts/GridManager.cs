@@ -27,12 +27,13 @@ public class GridManager : MonoBehaviour
     private GameObject ghostOfPieceToBeMoved;
     private Vector3 startedDragHere;
     public float minDistanceToStartDrag;
+    public bool debugging;
     // Start is called before the first frame update
     void Start()
     {
         grid = gameObject;
-        grid.transform.localScale = new Vector3(((float)gridSizeX) / (float)10.0, (float)1.0,((float)gridSizeY) / (float)10.0);
-        this.transform.position = new Vector3(gridAnchor.x + (((float)gridSizeX) / (float)2.0), gridAnchor.y + (((float)gridSizeY) / (float)2.0), 0.0f);
+        grid.transform.localScale = new Vector3(((float)gridSizeX)*gridScale / (float)10.0, (float)1.0,((float)gridSizeY)*gridScale / (float)10.0);
+        this.transform.position = new Vector3(gridAnchor.x + (((float)gridSizeX)*gridScale / (float)2.0), gridAnchor.y + (((float)gridSizeY)*gridScale / (float)2.0), 0.0f);
         render = GetComponent<Renderer>();
         render.material.mainTextureScale = new Vector2((float)gridSizeX, (float)gridSizeY);
         //initialize contents and set all to empty = 0
@@ -65,7 +66,7 @@ public class GridManager : MonoBehaviour
             {
                 dragging = true;
                 watchingForStartDrag = false;
-                pieceToBeMoved = piecesPlaced[x, y];
+                pieceToBeMoved = piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)];
                 string trueName = pieceToBeMoved.name.Substring(0, pieceToBeMoved.name.Length - 7);
                 ghostOfPieceToBeMoved = (GameObject)Instantiate(Resources.Load(trueName+" Ghost"), mouseLocationWorldSpace, Quaternion.identity);
             }
@@ -97,10 +98,51 @@ public class GridManager : MonoBehaviour
                     //once the left mouse button is released, check if a piece can be placed at the tile corresponding to mouse's position
                     if (x >= 0 && y >= 0)
                     {
-                        if (CheckCanBePlaced(x, y))
+                        bool allClear = true;
+                        for(int i =0; i < availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied.Length; i++)
                         {
+                            if(!CheckCanBePlaced((int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].x+x, (int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].y+y))
+                            {
+                                allClear = false;
+                            }
+                        }
+                        if (allClear)
+                        {
+
+                            //find which coordinates are occupied by other pieces
+                            for (int i = 0; i < availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied.Length; i++)
+                            {
+
+                                if(contents[(int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].x + x, (int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].y + y] == 2)
+                                {
+                                    int ax = (int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].x + x;
+                                    int ay = (int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].y + y;
+                                    Debug.Log(piecesPlaced[ax, ay].name+" is at X: "+ax+", Y: "+ay);
+
+                                    int rx = piecesPlaced[ax, ay].GetComponent<GridObjects>().GetRootX();
+                                    int ry = piecesPlaced[ax, ay].GetComponent<GridObjects>().GetRootY();
+
+                                    DestroyPiece(rx, ry);
+
+                                    AddPieceToAvailablePieces(piecesPlaced[rx, ry]);
+                                    Debug.Log("adding");
+                                    Destroy(piecesPlaced[rx, ry]);
+
+                                }
+
+                            }
+
                             //place the piece at x,y
                             PlacePiece(x, y);
+
+                            //update contents, to accurately reflect the state of the grid based on what tiles the placed piece takes up
+                            for(int i = 0; i < availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied.Length; i++)
+                            {
+                                int ax = (int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].x + x;
+                                int ay = (int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].y + y;
+                                contents[ax, ay] = 2;
+                            }    
+                            //Debug.Log("X: " + piecesPlaced[x, y].GetComponent<GridObjects>().GetRootX()+", Y: "+ piecesPlaced[x, y].GetComponent<GridObjects>().GetRootY());
                         }
                     }
                 }
@@ -108,13 +150,13 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        //check if the mouse is within the grid
-        if (mouseLocationWorldSpace.x < gridAnchor.x || mouseLocationWorldSpace.x > gridAnchor.x + (float)gridSizeX || mouseLocationWorldSpace.y < gridAnchor.y || mouseLocationWorldSpace.y > gridAnchor.y + (float)gridSizeY)
+        //check if the mouse is not within the grid
+        if (mouseLocationWorldSpace.x < gridAnchor.x || mouseLocationWorldSpace.x > gridAnchor.x + (float)gridSizeX*gridScale || mouseLocationWorldSpace.y < gridAnchor.y || mouseLocationWorldSpace.y > gridAnchor.y + (float)gridSizeY*gridScale)
         {
             //Debug.Log("Out of bounds!!!");
             Color c = render.material.color;
             c.a = 0;
-            render.material.color = c;
+            render.material.color = c;//make the grid completely transparent
 
             if (dragging)
             {
@@ -124,23 +166,36 @@ public class GridManager : MonoBehaviour
                 if(Input.GetKeyUp("mouse 0"))
                 {
                     Destroy(ghostOfPieceToBeMoved);
+                    Destroy(pieceToBeMoved);
                     dragging = false;
-                    contents[FindIndexX(startedDragHere), FindIndexY(startedDragHere)] = 0;
+
+                    for (int i = 0; i < pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied.Length; i++)
+                    {
+                        int px = (int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].x + FindIndexX(startedDragHere);
+                        int py = (int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].y + FindIndexY(startedDragHere);
+                        contents[px, py] = 0;
+                    }
+
                     AddPieceToAvailablePieces(pieceToBeMoved);
                     Destroy(piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)]);
-                    Destroy(pieceToBeMoved);
+                    
 
                 }
             }
 
         }
-        else
+        else//it is within the grid
         {
             //Debug.Log("Safe!!!");
             Color c = render.material.color;
             c.a = 1;
-            render.material.color = c;
+            render.material.color = c;//make the grid visible
 
+            //print out the current contents of the tile the mouse is hovering over, for debugging purposes
+            if (debugging)
+            {
+                Debug.Log("Current Contents: " + contents[x, y]);
+            }
             if (dragging)
             {
                 //set ghostpiece location to current tile
@@ -150,26 +205,85 @@ public class GridManager : MonoBehaviour
                 ghostOfPieceToBeMoved.transform.position = targetPosition;
                 if(Input.GetKeyUp("mouse 0"))
                 {
-                    if (CheckCanBePlaced(x, y)&&!(x== FindIndexX(startedDragHere)&&y== FindIndexY(startedDragHere)))
+                    bool allClear = true;
+                    for (int i = 0; i < pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied.Length; i++)
                     {
-                        if (contents[x, y] == 2)
+                        if (!CheckCanBePlaced((int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].x + x, (int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].y + y))
                         {
-                            GameObject g = piecesPlaced[x, y];
-                            Debug.Log(g.name);
-                            AddPieceToAvailablePieces(g);
-                            
-                            Destroy(g);
+                            allClear = false;
                         }
+                    }
+                    if (allClear)
+                    {
+
+                        Vector2[] tempTilesOccupied = pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied;
+                        int rx = piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)].GetComponent<GridObjects>().GetRootX();
+                        int ry = piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)].GetComponent<GridObjects>().GetRootY();
+                        DestroyPiece(rx, ry);
+                        
+                        //find which coordinates are occupied by other pieces
+                        for (int i = 0; i < pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied.Length; i++)
+                        {
+                            Debug.Log("x: "+x+", y:"+y);
+                            Debug.Log("i: "+i);
+                            if (contents[(int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].x + x, (int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].y + y] == 2)
+                            {
+                                int ax = (int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].x + x;
+                                int ay = (int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].y + y;
+                                Debug.Log(piecesPlaced[ax, ay].name + " is at X: " + ax + ", Y: " + ay);
+
+                                int tx = piecesPlaced[ax, ay].GetComponent<GridObjects>().GetRootX();
+                                int ty = piecesPlaced[ax, ay].GetComponent<GridObjects>().GetRootY();
+                                DestroyPiece(ax, ay);
+                                AddPieceToAvailablePieces(piecesPlaced[tx, ty]);
+                                Destroy(piecesPlaced[tx, ty]);
+
+                            }
+
+                        }
+
+                        //if (contents[x, y] == 2)
+                        //{
+                            //GameObject g = piecesPlaced[x, y];
+                            //Debug.Log("Replacing "+g.name);
+                            //AddPieceToAvailablePieces(g);
+                            
+                            //Destroy(g);
+                        //}
                         
                         string trueName = pieceToBeMoved.name.Substring(0, pieceToBeMoved.name.Length - 7);
                         GameObject go = (GameObject)Instantiate(Resources.Load(trueName), targetPosition, Quaternion.identity);
-                        piecesPlaced[x, y] = go;
-                        contents[FindIndexX(startedDragHere), FindIndexY(startedDragHere)] = 0;
-                        contents[x, y] = 2;
-                        Destroy(ghostOfPieceToBeMoved);
-                        Debug.Log(pieceToBeMoved.name);
-                        Destroy(piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)]);
+                        go.GetComponent<GridObjects>().SetRootLocation(x, y);
+
+
+                        //int rx = piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)].GetComponent<GridObjects>().GetRootX();
+                        //int ry = piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)].GetComponent<GridObjects>().GetRootY();
+
+                        //Vector2[] tempTilesOccupied = pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied;
+
+                        //DestroyPiece(rx,ry);
+                        //Destroy(pieceToBeMoved);
+
+                        for (int i = 0; i < pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied.Length; i++)
+                        {
+                            int ax = (int)piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)].GetComponent<GridObjects>().tilesOccupied[i].x + rx;
+                            int ay = (int)piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)].GetComponent<GridObjects>().tilesOccupied[i].y + ry;
+                            Debug.Log("rx: " + rx + ", ry: " + ry);
+                            Debug.Log("ax: " + ax + ", ay: " + ay);
+                            contents[ax, ay] = 0;
+                        }
+                        for (int i = 0; i < pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied.Length; i++)
+                        {
+                            int ax = (int)tempTilesOccupied[i].x + x;
+                            int ay = (int)tempTilesOccupied[i].y + y;
+                            contents[ax, ay] = 2;
+                            piecesPlaced[ax, ay] = go;
+                        }
                         Destroy(pieceToBeMoved);
+                        Destroy(ghostOfPieceToBeMoved);
+                        //Debug.Log("Placing "+pieceToBeMoved.name);
+                        //Destroy(piecesPlaced[FindIndexX(startedDragHere), FindIndexY(startedDragHere)]);
+                        //Destroy(pieceToBeMoved);
                         dragging = false;
                     }
                     else
@@ -189,10 +303,11 @@ public class GridManager : MonoBehaviour
             if (contents[x, y] == 2)
             {
                 //Debug.Log("Contents = 2");
+
                 GameObject piece = piecesPlaced[x, y];
                 AddPieceToAvailablePieces(piece);
-                Destroy(piecesPlaced[x,y]);
                 DestroyPiece(x, y);
+                Destroy(piecesPlaced[x,y]);                
             }
         }
     }
@@ -266,6 +381,7 @@ public class GridManager : MonoBehaviour
 
     public bool CheckCanBePlaced(int x, int y)
     {
+        
         if (x == 0 || x == gridSizeX - 1)
         {
             return false;
@@ -334,16 +450,37 @@ public class GridManager : MonoBehaviour
         GameObject go = (GameObject)Instantiate(availablePieces[indexSelected],targetPosition, Quaternion.identity);
         if(piecesPlaced[x, y] != null)
         {
-            AddPieceToAvailablePieces(piecesPlaced[x, y]);
-            Destroy(piecesPlaced[x, y]);
+            //AddPieceToAvailablePieces(piecesPlaced[x, y]);
+            //Destroy(piecesPlaced[x, y]);
         }
-        piecesPlaced[x, y] = go;
+
+        for (int i = 0; i < availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied.Length; i++)
+        {
+            int ax = (int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].x + x;
+            int ay = (int)availablePieces[indexSelected].GetComponent<GridObjects>().tilesOccupied[i].y + y;
+            piecesPlaced[ax, ay] = go;
+        }
+        go.GetComponent<GridObjects>().SetRootLocation(x, y);
         contents[x, y] = 2;
         RemovePieceFromAvailablePieces(availablePieces[indexSelected]);
+        Debug.Log("X: "+ go.GetComponent<GridObjects>().GetRootX()+", Y: "+ go.GetComponent<GridObjects>().GetRootY());
         //Debug.Log("placing selected piece:" + availablePieces[indexSelected].name + " at: X: " + x + ", Y: " + y);
     }
     public void DestroyPiece(int x, int y)
     {
+
+        int rx = piecesPlaced[x, y].GetComponent<GridObjects>().GetRootX();
+        int ry = piecesPlaced[x, y].GetComponent<GridObjects>().GetRootY();
+
+        for (int i = 0; i < piecesPlaced[x, y].GetComponent<GridObjects>().tilesOccupied.Length; i++)
+        {
+            int ax = (int)piecesPlaced[x, y].GetComponent<GridObjects>().tilesOccupied[i].x + rx;
+            int ay = (int)piecesPlaced[x, y].GetComponent<GridObjects>().tilesOccupied[i].y + ry;
+            Debug.Log("rx: " + rx + ", ry: " + ry);
+            Debug.Log("ax: " + ax + ", ay: " + ay);
+            contents[ax, ay] = 0;
+        }
+
         contents[x, y] = 0;
         if (watchingForStartDrag)
         {
