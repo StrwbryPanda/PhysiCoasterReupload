@@ -7,6 +7,8 @@ TagManager:
   - Obstacle
   - Track
   - Gem
+  - Graph
+  - Graph Lines
   layers:
   - Default
   - TransparentFX

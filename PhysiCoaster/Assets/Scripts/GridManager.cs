@@ -49,7 +49,7 @@ public class GridManager : MonoBehaviour
         
         //find obstacles in the scene and add them to the array. once save & load is added, make this run PopulateGrid after the scene is filled
         PopulateGrid();
-        PrintContents();
+        //PrintContents();
     }
 
     // Update is called once per frame
@@ -224,13 +224,13 @@ public class GridManager : MonoBehaviour
                         //find which coordinates are occupied by other pieces
                         for (int i = 0; i < pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied.Length; i++)
                         {
-                            Debug.Log("x: "+x+", y:"+y);
-                            Debug.Log("i: "+i);
+                            //Debug.Log("x: "+x+", y:"+y);
+                            //Debug.Log("i: "+i);
                             if (contents[(int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].x + x, (int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].y + y] == 2)
                             {
                                 int ax = (int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].x + x;
                                 int ay = (int)pieceToBeMoved.GetComponent<GridObjects>().tilesOccupied[i].y + y;
-                                Debug.Log(piecesPlaced[ax, ay].name + " is at X: " + ax + ", Y: " + ay);
+                                //Debug.Log(piecesPlaced[ax, ay].name + " is at X: " + ax + ", Y: " + ay);
 
                                 int tx = piecesPlaced[ax, ay].GetComponent<GridObjects>().GetRootX();
                                 int ty = piecesPlaced[ax, ay].GetComponent<GridObjects>().GetRootY();
@@ -463,7 +463,7 @@ public class GridManager : MonoBehaviour
         go.GetComponent<GridObjects>().SetRootLocation(x, y);
         contents[x, y] = 2;
         RemovePieceFromAvailablePieces(availablePieces[indexSelected]);
-        Debug.Log("X: "+ go.GetComponent<GridObjects>().GetRootX()+", Y: "+ go.GetComponent<GridObjects>().GetRootY());
+        //Debug.Log("X: "+ go.GetComponent<GridObjects>().GetRootX()+", Y: "+ go.GetComponent<GridObjects>().GetRootY());
         //Debug.Log("placing selected piece:" + availablePieces[indexSelected].name + " at: X: " + x + ", Y: " + y);
     }
     public void DestroyPiece(int x, int y)
@@ -476,8 +476,8 @@ public class GridManager : MonoBehaviour
         {
             int ax = (int)piecesPlaced[x, y].GetComponent<GridObjects>().tilesOccupied[i].x + rx;
             int ay = (int)piecesPlaced[x, y].GetComponent<GridObjects>().tilesOccupied[i].y + ry;
-            Debug.Log("rx: " + rx + ", ry: " + ry);
-            Debug.Log("ax: " + ax + ", ay: " + ay);
+            //Debug.Log("rx: " + rx + ", ry: " + ry);
+            //Debug.Log("ax: " + ax + ", ay: " + ay);
             contents[ax, ay] = 0;
         }
 
