@@ -6,19 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Loader : MonoBehaviour
 {
-    string levelID;
-    // Start is called before the first frame update
-    void Start()
+    int LevelID = 0;
+    public void OnPressed(int LevelID)
     {
-        levelID = "Level";
+        SceneManager.LoadScene(LevelID);
     }
-
-    public void OnPressed()
-    {
-        SceneManager.LoadScene(levelID);
-    }
-
-
-
-
 }

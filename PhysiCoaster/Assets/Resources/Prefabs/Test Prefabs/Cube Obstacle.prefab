@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7031780776785839601}
   - component: {fileID: 3418984034801196772}
   - component: {fileID: 4138588559480959119}
+  - component: {fileID: 1617407252733977072}
   m_Layer: 0
   m_Name: Cube Obstacle
   m_TagString: Obstacle
@@ -113,3 +114,16 @@ MonoBehaviour:
   goType: 1
   xOffset: 0
   yOffset: 0
+  tilesOccupied: []
+--- !u!114 &1617407252733977072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8497915338529115014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3401ba12369564f488c4a34b7ed2a12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
