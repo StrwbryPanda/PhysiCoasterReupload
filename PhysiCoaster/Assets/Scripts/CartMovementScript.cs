@@ -21,7 +21,8 @@ public class CartMovementScript : MonoBehaviour
     public float currentVelocity;
     public Vector3 currentVelVector;
     public Vector3 storedVelVector;
-    public float bottomHeight;
+    public GameObject end;
+    public float bottomHeightAdj;
     public float height;
     public float potentialEnergy;
     public float totalEnergy;
@@ -43,7 +44,7 @@ public class CartMovementScript : MonoBehaviour
         mass = rb.mass;
         startingVelocity = Mathf.Sqrt(2.0f * kineticEnergy / mass);
         currentVelocity = startingVelocity;
-        height = transform.position.y - bottomHeight;
+        height = transform.position.y - (end.gameObject.transform.position.y+bottomHeightAdj);
         potentialEnergy = mass * (float)9.81 * height;
         totalEnergy = startingKE + potentialEnergy;
     }
@@ -179,8 +180,8 @@ public class CartMovementScript : MonoBehaviour
 
     public void UpdateEnergyLevels()
     {
-        
-        height = transform.position.y - bottomHeight;
+
+        height = transform.position.y - (end.gameObject.transform.position.y + bottomHeightAdj);
         potentialEnergy = mass * (float)9.81 * height;
         kineticEnergy = totalEnergy-potentialEnergy;
         currentVelocity = Mathf.Sqrt(2.0f*kineticEnergy/mass);

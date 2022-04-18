@@ -79,7 +79,7 @@ public class LineGraphScript : MonoBehaviour
     public float ConvertDepValToY(float value)
     {
         float result = (value-minDepVal)/(maxDepVal-minDepVal);
-        result *= (maxAnchorPosition.y - minAnchorPosition.y);
+        result *= (maxActualPosition.y - minActualPosition.y);
         //Debug.Log("Y Value: " + result);
         return result;
     }
@@ -87,7 +87,7 @@ public class LineGraphScript : MonoBehaviour
     public float ConvertIndValToX(float value)
     {
         float result = (value-minIndVal) / (maxIndVal - minIndVal);
-        result *= (maxAnchorPosition.x-minAnchorPosition.x);
+        result *= (maxActualPosition.x-minActualPosition.x);
         //Debug.Log("X Value: " + result);
         return result;
     }
@@ -148,6 +148,10 @@ public class LineGraphScript : MonoBehaviour
     public void GraphData()
     {
         graph.SetActive(true);
+        minAnchorPosition = minAnchor.GetComponent<RectTransform>().anchoredPosition;
+        maxAnchorPosition = maxAnchor.GetComponent<RectTransform>().anchoredPosition;
+        minActualPosition = minAnchor.GetComponent<RectTransform>().position;
+        maxActualPosition = maxAnchor.GetComponent<RectTransform>().position;
         float portionSize = energyRecorded.Count / numberOfLines;
         int currentPortion = 0;
         int i = 0;

@@ -28,7 +28,7 @@ public class BarGraphScript : MonoBehaviour
     void Start()
     {
         startingKinetic = cart.GetComponent<CartMovementScript>().startingKE;
-        bottomHeight = cart.GetComponent<CartMovementScript>().bottomHeight;
+        //bottomHeight = cart.GetComponent<CartMovementScript>().bottomHeight;
         rb = cart.GetComponent<Rigidbody>();
         mass = rb.mass;     
         kert = kineticEnergyBar.rectTransform;
