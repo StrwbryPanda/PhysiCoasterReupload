@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GemCollect : MonoBehaviour
 {
-    int gems = 0;
+    public int gems = 0;
     // Start is called before the first frame update
     void Awake()
     {
