@@ -6,6 +6,7 @@ public class Failed : MonoBehaviour
 {
     GameObject starting;
     GameObject graph;
+    GameObject playButton;
     private void Start()
     {
         starting = GameObject.FindGameObjectWithTag("Start");
@@ -18,8 +19,10 @@ public class Failed : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.transform.position = starting.transform.position + new Vector3(0.0f, 0.365f, 0.0f);
-            graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(false);
+            graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(true);
             collision.gameObject.GetComponent<CartMovementScript>().SwitchCurrentMode(0);
+            playButton = GameObject.Find("Play Level Button");
+            playButton.GetComponent<PlayLevelScript>().StopPlaying();
             //collision.gameObject.GetComponent<Rigidbody>().Sleep();
             //Debug.Log("Current mode reset");
         }

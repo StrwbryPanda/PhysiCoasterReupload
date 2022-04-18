@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Loader : MonoBehaviour
 {
-    int LevelID = 0;
+    public int LevelID;
     public void OnPressed(int LevelID)
     {
         SceneManager.LoadScene(LevelID);

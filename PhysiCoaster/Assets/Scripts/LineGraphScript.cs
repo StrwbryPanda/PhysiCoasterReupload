@@ -59,21 +59,6 @@ public class LineGraphScript : MonoBehaviour
             UpdateValues();
             UpdateRecordedEnergyLevels();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1)&&!isRecording)
-        {
-            UpdateValues();
-            StartRecording();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //test line for graphing debugging
-            //ConnectPoints(connectingLine, ConvertValuesToVector(minIndVal, minDepVal), ConvertValuesToVector(maxIndVal, maxDepVal));
-
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            StopRecordingAndClearData(true);
-        }
         
     }
 

@@ -8,6 +8,9 @@ TagManager:
   - Track
   - Gem
   - Start
+  - Graph
+  - Graph Lines
+  - End
   layers:
   - Default
   - TransparentFX
