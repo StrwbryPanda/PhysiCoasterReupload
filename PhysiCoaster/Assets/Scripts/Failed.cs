@@ -5,9 +5,11 @@ using UnityEngine;
 public class Failed : MonoBehaviour
 {
     GameObject starting;
+    GameObject graph;
     private void Start()
     {
         starting = GameObject.FindGameObjectWithTag("Start");
+        graph = GameObject.FindGameObjectWithTag("Graph");
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,6 +18,7 @@ public class Failed : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.transform.position = starting.transform.position + new Vector3(0.0f, 0.365f, 0.0f);
+            graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(false);
             collision.gameObject.GetComponent<CartMovementScript>().SwitchCurrentMode(0);
             //collision.gameObject.GetComponent<Rigidbody>().Sleep();
             //Debug.Log("Current mode reset");
