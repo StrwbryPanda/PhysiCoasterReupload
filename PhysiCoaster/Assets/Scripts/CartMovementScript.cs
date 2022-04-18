@@ -20,6 +20,7 @@ public class CartMovementScript : MonoBehaviour
     private float startingVelocity;
     public float currentVelocity;
     public Vector3 currentVelVector;
+    public Vector3 storedVelVector;
     public float bottomHeight;
     public float height;
     public float potentialEnergy;
@@ -53,19 +54,7 @@ public class CartMovementScript : MonoBehaviour
 
         UpdateEnergyLevels();
 
-        if (debugging)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                SwitchCurrentMode(0);
-            }else if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                SwitchCurrentMode(1);
-            }else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                SwitchCurrentMode(2);
-            }
-        }
+        
 
         switch ((int)currentMode)
         {
@@ -93,6 +82,23 @@ public class CartMovementScript : MonoBehaviour
                 }
                 break;
         }
+
+        if (debugging)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                SwitchCurrentMode(0);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                SwitchCurrentMode(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                SwitchCurrentMode(2);
+            }
+        }
+
     }
 
 
@@ -133,7 +139,12 @@ public class CartMovementScript : MonoBehaviour
         switch (i)
         {
             case 0://Inactive, should be used at the end of the level to ensure that the cart is stopped and doesnt fall off. can add a statement this method with 0 when cart hits level end trigger
-                
+
+                if ((int)currentMode == 2)
+                {
+                    storedVelVector = rb.velocity;
+                }
+
                 rb.isKinematic = true;
                 currentMode = (PhysicsMode)0;
                 Debug.Log("Switching to mode: " + i);
@@ -153,9 +164,13 @@ public class CartMovementScript : MonoBehaviour
                 {
 
                     rb.velocity = currentVelVector;
+                }else if((int)currentMode == 0)
+                {
+                    rb.velocity = storedVelVector;
+
                 }
-                
-                currentMode = (PhysicsMode)2;
+
+                    currentMode = (PhysicsMode)2;
                 Debug.Log("Switching to mode: " + i);
                 Debug.Log("Curent Velocity Vector: " + currentVelVector);
                 break;

@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 5401636151413063945}
   - component: {fileID: 1876736389583019552}
   - component: {fileID: 9085351304953214812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StraightawayV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,9 +144,9 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5757459238877890934}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7ca6d0f6570f1364bb6f4b45f2625240, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4554808, y: 0.3983774, z: 0.14999999}
+  m_Size: {x: 1.52, y: 0.4, z: 0.14999999}
   m_Center: {x: 0.10446307, y: -0.064188704, z: 0}

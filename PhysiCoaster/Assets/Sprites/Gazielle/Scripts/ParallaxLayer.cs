@@ -15,7 +15,7 @@ public class ParallaxLayer : MonoBehaviour {
 
 	private void Awake() {
 		_transform = GetComponent<Transform> ();
-		_transform.position = new Vector3(_transform.position.x, 3.0f, 1.0f);
+		_transform.position = new Vector3(_transform.position.x, 3.575f, 1.0f);
 		_newPosition = _transform.position;
 		_offset = BaseObject.transform.position - _newPosition;
 	}
