@@ -6,7 +6,6 @@ public class LevelEndScript : MonoBehaviour
 {
     GameObject graph;
     public GameObject levelEndDisplay;
-    GameObject playButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +25,6 @@ public class LevelEndScript : MonoBehaviour
             graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(false);
             collision.gameObject.GetComponent<CartMovementScript>().SwitchCurrentMode(0);
             levelEndDisplay.SetActive(true);
-            playButton = GameObject.Find("Play Level Button");
-            playButton.SetActive(false);
         }
     }
 }

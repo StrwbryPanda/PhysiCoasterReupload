@@ -6,7 +6,7 @@ using UnityEngine;
 public class ParallaxLayer : MonoBehaviour {
 	[Range(-10f, 1f)]
 	public float ParallaxSpeed = 1f;
-	public GameObject BaseObject;
+	private GameObject BaseObject;
 
 	private Transform _transform;
 	private Vector3 _offset;
@@ -14,6 +14,7 @@ public class ParallaxLayer : MonoBehaviour {
 	private Vector3 _roundedPosition;
 
 	private void Awake() {
+		BaseObject = GameObject.Find("Main Camera");
 		_transform = GetComponent<Transform> ();
 		_transform.position = new Vector3(_transform.position.x, 3.575f, 1.0f);
 		_newPosition = _transform.position;

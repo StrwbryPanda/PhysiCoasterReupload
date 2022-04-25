@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    GameObject graph;
     GameObject player;
     int gems;
     int corctAnswr;
@@ -23,6 +24,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        graph = GameObject.FindGameObjectWithTag("Graph");
         player = GameObject.FindGameObjectWithTag("Player");
         trigger1 = true;
         trigger2 = true;
@@ -52,9 +54,9 @@ public class ScoreManager : MonoBehaviour
     void UpdateScore()
     {
       //  GemScore.text = gems + " out of 3 Collected";
-        Debug.Log(gems + " out of 3 Collected");
+        //Debug.Log(gems + " out of 3 Collected");
       //  QuestionScore.text = corctAnswr + " out of 2 Correct";
-        Debug.Log(corctAnswr + " out of 2 Correct");
+        //Debug.Log(corctAnswr + " out of 2 Correct");
     }
     public void IncreaseScore()
     {
@@ -69,6 +71,7 @@ public class ScoreManager : MonoBehaviour
             prevmode = (int)player.gameObject.GetComponent<CartMovementScript>().currentMode;
             check1.SetActive(true);
             player.gameObject.GetComponent<CartMovementScript>().SwitchCurrentMode(0);
+            graph.GetComponent<LineGraphScript>().PauseCollection();
             Debug.Log("Question 1 Triggered");
         }
         if ((trigger2 == true) && (stage == 2) && (trigger1 == false))
@@ -77,6 +80,7 @@ public class ScoreManager : MonoBehaviour
             prevmode = (int)player.gameObject.GetComponent<CartMovementScript>().currentMode;
             check2.SetActive(true);
             player.gameObject.GetComponent<CartMovementScript>().SwitchCurrentMode(0);
+            graph.GetComponent<LineGraphScript>().PauseCollection();
             Debug.Log("Question 2 Triggered");
         }
     }
@@ -90,5 +94,6 @@ public class ScoreManager : MonoBehaviour
     public void ReturnRun()
     {
         player.gameObject.GetComponent<CartMovementScript>().SwitchCurrentMode(prevmode);
+        graph.GetComponent<LineGraphScript>().ResumeCollection();
     }
 }

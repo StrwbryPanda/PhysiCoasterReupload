@@ -7,10 +7,12 @@ public class Failed : MonoBehaviour
     GameObject starting;
     GameObject graph;
     GameObject playButton;
+
     private void Start()
     {
         starting = GameObject.FindGameObjectWithTag("Start");
         graph = GameObject.FindGameObjectWithTag("Graph");
+        playButton = GameObject.Find("Play Level Button");
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -18,10 +20,11 @@ public class Failed : MonoBehaviour
         // Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.transform.position = starting.transform.position + new Vector3(0.0f, 0.365f, 0.0f);
+            collision.gameObject.GetComponent<CartMovementScript>().ShowCrashFailurePrompt();
+            collision.gameObject.GetComponent<CartMovementScript>().ResetCart();
             graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(true);
             collision.gameObject.GetComponent<CartMovementScript>().SwitchCurrentMode(0);
-            playButton = GameObject.Find("Play Level Button");
+            
             playButton.GetComponent<PlayLevelScript>().StopPlaying();
             //collision.gameObject.GetComponent<Rigidbody>().Sleep();
             //Debug.Log("Current mode reset");

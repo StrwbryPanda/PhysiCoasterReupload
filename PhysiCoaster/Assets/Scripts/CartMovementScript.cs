@@ -12,21 +12,31 @@ public enum PhysicsMode
 public class CartMovementScript : MonoBehaviour
 {
     public GameObject cartBody;
+    public GameObject stallFailurePrompt;
+    public GameObject crashFailurePrompt;
     private Rigidbody rb;
+    public Vector3 startingPosition;
+    public Quaternion startingRotation;
+    public Quaternion startingCartRotation;
+    GameObject graph;
     private float mass;
     public PhysicsMode currentMode;
+    public float gForce;
     public float startingKE;
     public float kineticEnergy;
     private float startingVelocity;
     public float currentVelocity;
     public Vector3 currentVelVector;
     public Vector3 storedVelVector;
+    public float distanceOverestimatedLastFrame;
     public GameObject end;
     public float bottomHeightAdj;
     public float height;
     public float potentialEnergy;
     public float totalEnergy;
     public float angleOfDecline;
+    public float minDistanceToNotStall;
+    public bool insufficientEnergyToAdvance;
     public float castDistance;
     public LayerMask mask;
     public bool rideableSurfaceDetected;
@@ -40,12 +50,17 @@ public class CartMovementScript : MonoBehaviour
     
     void Awake()
     {
+        crashFailurePrompt.SetActive(false);
+        graph = GameObject.FindGameObjectWithTag("Graph");
+        startingPosition = transform.position;
+        startingRotation = transform.rotation;
+        startingCartRotation = cartBody.transform.rotation;
         rb = gameObject.GetComponent<Rigidbody>();
         mass = rb.mass;
         startingVelocity = Mathf.Sqrt(2.0f * kineticEnergy / mass);
         currentVelocity = startingVelocity;
         height = transform.position.y - (end.gameObject.transform.position.y+bottomHeightAdj);
-        potentialEnergy = mass * (float)9.81 * height;
+        potentialEnergy = mass * gForce * height;
         totalEnergy = startingKE + potentialEnergy;
     }
 
@@ -67,20 +82,15 @@ public class CartMovementScript : MonoBehaviour
                 GetAngleBelowCart();
                 //Debug.Log(angleOfDecline);
                 RideSurface();
+                if (insufficientEnergyToAdvance)
+                {
+                    SwitchCurrentMode(0);
+                    stallFailurePrompt.SetActive(true);
+                }
                 break;
 
             case 2://Simulated
                 GetAngleBelowCart();
-                if (rideableSurfaceDetected&&grounded)
-                {
-                    if (jumping && (Time.time - jumpStartTime > minJumpTime))
-                    {
-                        SwitchCurrentMode(1);
-                        currentVelocity = rb.velocity.magnitude;
-                        jumping = false;
-                    }
-                    
-                }
                 break;
         }
 
@@ -125,9 +135,10 @@ public class CartMovementScript : MonoBehaviour
             if (!jumping)
             {
                 jumping = true;
+                grounded = false;
                 jumpStartTime = Time.time;
             }
-            if ((int)currentMode != 2)
+            if ((int)currentMode != 2&&currentMode!=0)
             {
                 SwitchCurrentMode(2);
             }
@@ -144,6 +155,7 @@ public class CartMovementScript : MonoBehaviour
                 if ((int)currentMode == 2)
                 {
                     storedVelVector = rb.velocity;
+                    rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
                 }
 
                 rb.isKinematic = true;
@@ -182,7 +194,7 @@ public class CartMovementScript : MonoBehaviour
     {
 
         height = transform.position.y - (end.gameObject.transform.position.y + bottomHeightAdj);
-        potentialEnergy = mass * (float)9.81 * height;
+        potentialEnergy = mass * gForce * height;
         kineticEnergy = totalEnergy-potentialEnergy;
         currentVelocity = Mathf.Sqrt(2.0f*kineticEnergy/mass);
     }
@@ -190,49 +202,101 @@ public class CartMovementScript : MonoBehaviour
     public void RideSurface()
     {
         float declineInRadians = (Mathf.PI / 180) * angleOfDecline;
+        
         float xMoved = Mathf.Cos(declineInRadians);
         float yMoved = Mathf.Sin(declineInRadians);
         Vector3 targetIdentity = new Vector3(xMoved, yMoved, 0.0f);
         float distanceMoved = Time.deltaTime * currentVelocity;
+        float distanceTraveledThisFrame;
+        float distanceTraveledThisIteration;
         currentVelVector = targetIdentity * distanceMoved / Time.deltaTime;
-        Vector3 priorLocation = transform.position;
-        Vector3 targetOrigin;
-        float remainingDistance = distanceMoved;
-        for (int i = 0; i < stepCount; i++)
+        if (distanceMoved < minDistanceToNotStall)
         {
-            float stepDistance = remainingDistance / (float)(stepCount-i);
-            targetOrigin = stepDistance * targetIdentity;
-            targetOrigin = priorLocation + targetOrigin;
-            Ray dRay = new Ray(targetOrigin, Vector3.down);
-            RaycastHit dHitInfo;
-            Ray uRay = new Ray(targetOrigin, Vector3.up);
-            RaycastHit uHitInfo;
-            if (Physics.Raycast(dRay, out dHitInfo, castDistance, mask, QueryTriggerInteraction.Ignore))
-            {
-                priorLocation = dHitInfo.point + new Vector3(0.0f, colliderRadius, 0.0f);
-                Debug.DrawLine(dRay.origin, dHitInfo.point, Color.black);
-            }
-            else if (Physics.Raycast(uRay, out uHitInfo, castDistance, mask, QueryTriggerInteraction.Ignore))
-            {
-                priorLocation = uHitInfo.point + new Vector3(0.0f, -colliderRadius, 0.0f);
-                Debug.DrawLine(uRay.origin, uHitInfo.point, Color.black);
-            }
-            else
-            {
-                priorLocation = targetOrigin;
-                Debug.DrawLine(dRay.origin, dHitInfo.point, Color.black);
-            }
-
+            insufficientEnergyToAdvance=true;
         }
-        transform.position = priorLocation;
+        else
+        {
+            Debug.Log("currentVelVector: " + currentVelVector);
+            Vector3 priorLocation = transform.position;
+            Vector3 targetOrigin;
+            float remainingDistance = distanceMoved;
+            for (int i = 0; i < stepCount; i++)
+            {
+                float stepDistance = remainingDistance / (float)(stepCount - i);
+                targetOrigin = stepDistance * targetIdentity;
+                targetOrigin = priorLocation + targetOrigin;
+                Ray dRay = new Ray(targetOrigin, Vector3.down);
+                RaycastHit dHitInfo;
+                Ray uRay = new Ray(targetOrigin, Vector3.up);
+                RaycastHit uHitInfo;
+                if (Physics.Raycast(dRay, out dHitInfo, castDistance, mask, QueryTriggerInteraction.Ignore))
+                {
+                    distanceTraveledThisIteration = Vector3.Distance(dHitInfo.point + new Vector3(0.0f, colliderRadius, 0.0f), priorLocation);
+                    priorLocation = dHitInfo.point + new Vector3(0.0f, colliderRadius, 0.0f);
+                    Debug.DrawLine(dRay.origin, dHitInfo.point, Color.black);
+                    Debug.Log("i: " + i + ", Path 1:" + distanceTraveledThisIteration);
+                    remainingDistance -= distanceTraveledThisIteration;
+                }
+                else if (Physics.Raycast(uRay, out uHitInfo, castDistance, mask, QueryTriggerInteraction.Ignore))
+                {
+                    distanceTraveledThisIteration = Vector3.Distance(uHitInfo.point + new Vector3(0.0f, -colliderRadius, 0.0f), priorLocation);
+                    priorLocation = uHitInfo.point + new Vector3(0.0f, -colliderRadius, 0.0f);
+                    Debug.DrawLine(uRay.origin, uHitInfo.point, Color.black);
+                    Debug.Log("i: " + i + ", Path 2:" + distanceTraveledThisIteration);
+                    remainingDistance -= distanceTraveledThisIteration;
+                }
+                else
+                {
+                    distanceTraveledThisIteration = Vector3.Distance(targetOrigin, priorLocation);
+                    priorLocation = targetOrigin;
+                    Debug.DrawLine(dRay.origin, dHitInfo.point, Color.black);
+                    Debug.Log("i: " + i + ", Path 3:" + distanceTraveledThisIteration);
+                    remainingDistance -= distanceTraveledThisIteration;
+                }
+
+            }
+            distanceTraveledThisFrame = Vector3.Distance(transform.position, priorLocation);
+            Debug.Log("Prior Location: " + priorLocation + ", Distance Traveled This Frame: "+distanceTraveledThisFrame);
+            transform.position = priorLocation;
+        }
+        
     }
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.layer == 6)
+        if (collision.collider.gameObject.layer == 6&& !grounded)
         {
-            grounded = true;
+            if (jumping && (Time.time - jumpStartTime > minJumpTime))
+            {
+                SwitchCurrentMode(1);
+                currentVelocity = rb.velocity.magnitude;
+                jumping = false;
+
+                grounded = true;
+                Ray dRay = new Ray(transform.position, Vector3.down);
+                RaycastHit dHitInfo;
+                if (Physics.Raycast(dRay, out dHitInfo, castDistance, mask, QueryTriggerInteraction.Ignore))
+                {
+                    transform.position= dHitInfo.point + new Vector3(0.0f, colliderRadius, 0.0f);
+                }
+
+            }
+            
         }
+    }
+
+    public void ResetCart()
+    {
+        graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(true);
+        transform.position = startingPosition;
+        transform.rotation = startingRotation;
+        cartBody.transform.rotation = startingCartRotation;
+        insufficientEnergyToAdvance = false;
+    }
+
+    public void ShowCrashFailurePrompt()
+    {
+        crashFailurePrompt.SetActive(true);
     }
 
 }

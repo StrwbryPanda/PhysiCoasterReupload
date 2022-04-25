@@ -16,6 +16,8 @@ public class LineGraphScript : MonoBehaviour
     public float tmeMax;
     public float startedRecordingtime;
     public float currentTime;
+    public float lostTime;
+    public float pauseStartTime;
     private List<EnergySnapshot> energyRecorded;
     public Vector2 debugStartPoint;
     public Vector2 debugEndPoint;
@@ -38,6 +40,7 @@ public class LineGraphScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lostTime = 0.0f;
         energyRecorded = new List<EnergySnapshot>();
         pe = cart.GetComponent<CartMovementScript>().potentialEnergy;
         ke = cart.GetComponent<CartMovementScript>().kineticEnergy;
@@ -99,7 +102,7 @@ public class LineGraphScript : MonoBehaviour
 
     public void UpdateValues()
     {
-        currentTime = Time.time;
+        currentTime = Time.time-lostTime;
         pe = cart.GetComponent<CartMovementScript>().potentialEnergy;
         ke = cart.GetComponent<CartMovementScript>().kineticEnergy;
         tme = cart.GetComponent<CartMovementScript>().totalEnergy;
@@ -123,10 +126,11 @@ public class LineGraphScript : MonoBehaviour
 
     public void StopRecordingAndClearData(bool shouldClearData)
     {
-        Debug.Log("Level Failed. Recording of cart's energy has been stopped.");
+        //Debug.Log("Level Failed. Recording of cart's energy has been stopped.");
         isRecording = false;
         if (shouldClearData)
         {
+            lostTime = 0.0f;
             energyRecorded.Clear();
             GameObject[] lines = GameObject.FindGameObjectsWithTag("Graph Lines");
 
@@ -147,7 +151,10 @@ public class LineGraphScript : MonoBehaviour
 
     public void GraphData()
     {
+        Debug.Log("Start Time: " + energyRecorded[0].timeCaptured + ", End Time: " + energyRecorded[energyRecorded.Count-1].timeCaptured);
         graph.SetActive(true);
+        maxlabel.text = ((int)(Mathf.Floor(tmeMax))).ToString()+" J";
+        halfLabel.text = ((int)(Mathf.Floor(tmeMax/2.0f))).ToString();
         minAnchorPosition = minAnchor.GetComponent<RectTransform>().anchoredPosition;
         maxAnchorPosition = maxAnchor.GetComponent<RectTransform>().anchoredPosition;
         minActualPosition = minAnchor.GetComponent<RectTransform>().position;
@@ -157,8 +164,8 @@ public class LineGraphScript : MonoBehaviour
         int i = 0;
         while (currentPortion<numberOfLines)
         {
-            Debug.Log("current portion: "+currentPortion);
-            Debug.Log("i: " + i);
+            //Debug.Log("current portion: "+currentPortion);
+            //Debug.Log("i: " + i);
             if (currentPortion == 0)
             {
                 
@@ -213,6 +220,18 @@ public class LineGraphScript : MonoBehaviour
         isRecording = true;
     }
 
+    public void PauseCollection()
+    {
+        isRecording = false;
+        pauseStartTime = Time.time;
+    }
+
+    public void ResumeCollection()
+    {
+        isRecording = true;
+        lostTime += (Time.time - pauseStartTime);
+    }
+
 }
 
 public struct EnergySnapshot
@@ -234,4 +253,5 @@ public struct EnergySnapshot
     {
         return "Time: " + timeCaptured + " seconds, PE: " + potential + "J , KE: " + kinetic + "J , TME: " + total + "J.";
     }
+
 }
