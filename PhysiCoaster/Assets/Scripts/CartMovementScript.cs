@@ -12,8 +12,8 @@ public enum PhysicsMode
 public class CartMovementScript : MonoBehaviour
 {
     public GameObject cartBody;
-    public GameObject stallFailurePrompt;
-    public GameObject crashFailurePrompt;
+    GameObject stallFailurePrompt;
+    GameObject crashFailurePrompt;
     private Rigidbody rb;
     public Vector3 startingPosition;
     public Quaternion startingRotation;
@@ -29,7 +29,7 @@ public class CartMovementScript : MonoBehaviour
     public Vector3 currentVelVector;
     public Vector3 storedVelVector;
     public float distanceOverestimatedLastFrame;
-    public GameObject end;
+    GameObject end;
     public float bottomHeightAdj;
     public float height;
     public float potentialEnergy;
@@ -50,6 +50,10 @@ public class CartMovementScript : MonoBehaviour
     
     void Awake()
     {
+        end = GameObject.FindGameObjectWithTag("End");
+        stallFailurePrompt = GameObject.Find("Stall Failure Prompt");
+        stallFailurePrompt.SetActive(false);
+        crashFailurePrompt = GameObject.Find("Crash Failure Prompt");
         crashFailurePrompt.SetActive(false);
         graph = GameObject.FindGameObjectWithTag("Graph");
         startingPosition = transform.position;

@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class LevelEndScript : MonoBehaviour
 {
-    GameObject graph;
-    public GameObject levelEndDisplay;
+    GameObject lineGraphHolder;
+    GameObject lineGraph;
+    GameObject barGraph;
+    GameObject levelEndDisplay;
     // Start is called before the first frame update
     void Start()
     {
-        graph = GameObject.FindGameObjectWithTag("Graph");
+        lineGraphHolder = GameObject.Find("Line Graph Container");
+        lineGraph = GameObject.FindGameObjectWithTag("Graph");
+        //lineGraph.SetActive(false);
+        barGraph = GameObject.Find("Energy Bar Chart Panel");
+        levelEndDisplay = GameObject.Find("Final Screen");
+        levelEndDisplay.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,9 +29,11 @@ public class LevelEndScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(false);
+            lineGraphHolder.GetComponent<LineGraphScript>().StopRecordingAndClearData(false);
             collision.gameObject.GetComponent<CartMovementScript>().SwitchCurrentMode(0);
             levelEndDisplay.SetActive(true);
+            levelEndDisplay.GetComponent<UpdateScoreLabelScript>().UpdateLabels();
+            barGraph.SetActive(false);
         }
     }
 }

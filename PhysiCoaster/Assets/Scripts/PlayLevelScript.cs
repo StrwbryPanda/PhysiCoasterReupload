@@ -6,11 +6,12 @@ public class PlayLevelScript : MonoBehaviour
 {
     GameObject graph;
     bool playing;
-    public GameObject cart;
+    GameObject cart;
     // Start is called before the first frame update
     void Start()
     {
-        graph = GameObject.FindGameObjectWithTag("Graph");
+        graph = GameObject.Find("Line Graph Container");
+        cart = GameObject.Find("Cart Anchor");
     }
 
     // Update is called once per frame

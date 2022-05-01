@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BarGraphScript : MonoBehaviour
 {
-    public GameObject cart;
+    GameObject cart;
     private Rigidbody rb;
     private float mass;
     private float height;
@@ -27,6 +27,7 @@ public class BarGraphScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cart = GameObject.Find("Cart Anchor");
         startingKinetic = cart.GetComponent<CartMovementScript>().startingKE;
         //bottomHeight = cart.GetComponent<CartMovementScript>().bottomHeight;
         rb = cart.GetComponent<Rigidbody>();

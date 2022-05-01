@@ -7,8 +7,8 @@ public class ScoreManager : MonoBehaviour
 {
     GameObject graph;
     GameObject player;
-    int gems;
-    int corctAnswr;
+    public int gems;
+    public int corctAnswr;
     //public Text GemScore;
    // public Text QuestionScore;
     //public Camera main;
@@ -24,8 +24,8 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        graph = GameObject.FindGameObjectWithTag("Graph");
-        player = GameObject.FindGameObjectWithTag("Player");
+        graph = GameObject.Find("Line Graph Container");
+        player = GameObject.Find("Cart Anchor");
         trigger1 = true;
         trigger2 = true;
         complete = false;
@@ -37,6 +37,7 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         CheckTrigger();
+
         GrabScore();
         if (complete == true)
         {

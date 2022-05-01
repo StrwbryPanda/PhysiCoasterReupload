@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LineGraphScript : MonoBehaviour
 {
-    public GameObject cart;
+    GameObject cart;
     public GameObject graph;
     public Text maxlabel;
     public Text halfLabel;
@@ -40,6 +40,7 @@ public class LineGraphScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cart = GameObject.Find("Cart Anchor");
         lostTime = 0.0f;
         energyRecorded = new List<EnergySnapshot>();
         pe = cart.GetComponent<CartMovementScript>().potentialEnergy;

@@ -227,16 +227,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cartBody: {fileID: 6404225012240119068}
+  stallFailurePrompt: {fileID: 0}
+  crashFailurePrompt: {fileID: 0}
+  startingPosition: {x: 0, y: 0, z: 0}
+  startingRotation: {x: 0, y: 0, z: 0, w: 0}
+  startingCartRotation: {x: 0, y: 0, z: 0, w: 0}
   currentMode: 0
+  gForce: 0
   startingKE: 5
   kineticEnergy: 0
   currentVelocity: 0
   currentVelVector: {x: 0, y: 0, z: 0}
-  bottomHeight: 1.29
+  storedVelVector: {x: 0, y: 0, z: 0}
+  distanceOverestimatedLastFrame: 0
+  end: {fileID: 0}
+  bottomHeightAdj: 0
   height: 0
   potentialEnergy: 0
   totalEnergy: 0
   angleOfDecline: 0
+  minDistanceToNotStall: 0
+  insufficientEnergyToAdvance: 0
   castDistance: 0.4
   mask:
     serializedVersion: 2
@@ -314,7 +325,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 61df7f33804e4fd43aea0185e054a318, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 995a0705ab8576f4b9f4bde0d132d2bd, type: 2}
+      objectReference: {fileID: 2100000, guid: 3ded94581dbd0e74686ee08f75b3f25f, type: 2}
     - target: {fileID: 919132149155446097, guid: 61df7f33804e4fd43aea0185e054a318, type: 3}
       propertyPath: m_Name
       value: Cart

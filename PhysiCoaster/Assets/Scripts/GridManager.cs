@@ -323,7 +323,17 @@ public class GridManager : MonoBehaviour
             int y = 0;
             x = FindIndexX(obstacles[i]);
             y = FindIndexY(obstacles[i]);
-            contents[x, y] = obstacles[i].GetComponent<GridObjects>().GetGridObjectType();
+            Debug.Log("i: "+i+", x: "+x+", y: "+y+", obstacles length: "+obstacles.Length);
+            //contents[x, y] = obstacles[i].GetComponent<GridObjects>().GetGridObjectType();
+
+            for(int j = 0; j < obstacles[i].GetComponent<GridObjects>().tilesOccupied.Length; j++)
+            {
+                int ax = (int)obstacles[i].GetComponent<GridObjects>().tilesOccupied[j].x + x + (int)obstacles[i].GetComponent<GridObjects>().xOffset;
+                int ay = (int)obstacles[i].GetComponent<GridObjects>().tilesOccupied[j].y + y + (int)obstacles[i].GetComponent<GridObjects>().yOffset;
+                Debug.Log("ax: " + ax + ", ay: " + ay);
+                contents[ax,ay] = obstacles[i].GetComponent<GridObjects>().GetGridObjectType();
+            }
+
         }
         
     }
