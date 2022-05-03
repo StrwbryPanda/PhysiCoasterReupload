@@ -11,6 +11,7 @@ TagManager:
   - Graph
   - Graph Lines
   - End
+  - Star
   layers:
   - Default
   - TransparentFX

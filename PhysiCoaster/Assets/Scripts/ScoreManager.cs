@@ -10,10 +10,12 @@ public class ScoreManager : MonoBehaviour
     public int gems;
     public int corctAnswr;
     //public Text GemScore;
-   // public Text QuestionScore;
+    // public Text QuestionScore;
     //public Camera main;
+    public Sprite fStar;
+    public Sprite hStar;
     bool complete;
-    int[] stars = { 0, 0, 0, 0, 0 };
+    int[] stardata = { 0, 0, 0, 0, 0 };
     bool trigger1;
     bool trigger2;
     public GameObject check1;
@@ -49,15 +51,27 @@ public class ScoreManager : MonoBehaviour
         gems = player.gameObject.GetComponent<GemCollect>().gems;
         for (int i = 0; i < (gems + corctAnswr); i++)
         {
-            stars[i] = 1;
+            stardata[i] = 1;
         }
     }
     void UpdateScore()
     {
-      //  GemScore.text = gems + " out of 3 Collected";
+        //  GemScore.text = gems + " out of 3 Collected";
         //Debug.Log(gems + " out of 3 Collected");
-      //  QuestionScore.text = corctAnswr + " out of 2 Correct";
+        //  QuestionScore.text = corctAnswr + " out of 2 Correct";
         //Debug.Log(corctAnswr + " out of 2 Correct");
+        GameObject[] stars = GameObject.FindGameObjectsWithTag("Star");
+        for (int i=0;i<stardata.Length;i++)
+        {
+            if(stardata[i] == 1)
+            {
+                stars[i].gameObject.GetComponent<Image>().sprite = fStar;
+            }
+            else
+            {
+                stars[i].gameObject.GetComponent<Image>().sprite = hStar;
+            }
+        }
     }
     public void IncreaseScore()
     {
