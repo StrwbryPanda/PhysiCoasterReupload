@@ -60,7 +60,7 @@ public class CartMovementScript : MonoBehaviour
         stallFailurePrompt.SetActive(false);
         crashFailurePrompt = GameObject.Find("Crash Failure Prompt");
         crashFailurePrompt.SetActive(false);
-        graph = GameObject.FindGameObjectWithTag("Graph");
+        graph = GameObject.Find("Line Graph Container");
         startingPosition = transform.position;
         startingRotation = transform.rotation;
         startingCartRotation = cartBody.transform.rotation;
@@ -131,6 +131,9 @@ public class CartMovementScript : MonoBehaviour
         Ray failCheckRay = new Ray(transform.position, Vector3.right);
         RaycastHit failCheckHitInfo;
 
+        Ray uFailCheckRay = new Ray(transform.position, Vector3.up);
+        RaycastHit uFailCheckHitInfo;
+
         if (Physics.Raycast(failCheckRay, out failCheckHitInfo, 0.25f, failMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawLine(failCheckRay.origin, failCheckHitInfo.point, Color.black);
@@ -138,45 +141,43 @@ public class CartMovementScript : MonoBehaviour
             {
                 Failed();
                 Debug.Log("Raycast hit fail hitbox.");
+                return 0.0f;
             }
         }
-        else
-        {
-            Debug.DrawLine(failCheckRay.origin, failCheckRay.origin+ (0.25f * failCheckRay.direction), Color.red);
-        }
+        //else
+        //{
+            //Debug.DrawLine(failCheckRay.origin, failCheckRay.origin+ (0.25f * failCheckRay.direction), Color.red);
+        //}
 
-        Ray uFailCheckRay = new Ray(transform.position, Vector3.up);
-        RaycastHit uFailCheckHitInfo;
+        
 
-        if (Physics.Raycast(uFailCheckRay, out uFailCheckHitInfo, 0.25f, failMask, QueryTriggerInteraction.Ignore))
+        else if (Physics.Raycast(uFailCheckRay, out uFailCheckHitInfo, 0.25f, failMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawLine(uFailCheckRay.origin, uFailCheckHitInfo.point, Color.black);
             if (uFailCheckHitInfo.collider.CompareTag("CrashFailHitbox"))
             {
                 Failed();
                 Debug.Log("Raycast hit fail hitbox.");
+                return 0.0f;
             }
         }
-        else
-        {
-            Debug.DrawLine(uFailCheckRay.origin, uFailCheckRay.origin + (0.25f * uFailCheckRay.direction), Color.red);
-        }
+        //else
+        //{
+            //Debug.DrawLine(uFailCheckRay.origin, uFailCheckRay.origin + (0.25f * uFailCheckRay.direction), Color.red);
+        //}
 
-        if (Physics.Raycast(ray, out hitInfo, castDistance, mask, QueryTriggerInteraction.Ignore)){
+        else if (Physics.Raycast(ray, out hitInfo, castDistance, mask, QueryTriggerInteraction.Ignore)){
             Debug.DrawLine(ray.origin, hitInfo.point, Color.black);
             angleOfDecline=Quaternion.FromToRotation(Vector3.up, hitInfo.normal).eulerAngles.z;
             if ((int)currentMode == 1)
             {
                 cartBody.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
-            }else
+            }            
+            if(hitInfo.collider.CompareTag("Fallout Boundary"))
             {
-                if(hitInfo.collider.CompareTag("Fallout Boundary"))
-                {
-                    Failed();
-                    Debug.Log("Raycast hit fallout boundary.");
-                }
-            }
-            
+                Failed();
+                Debug.Log("Raycast hit fallout boundary.");
+            }            
             rideableSurfaceDetected = true;
         }
         else
@@ -315,7 +316,7 @@ public class CartMovementScript : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.layer == 6&& !grounded)
+        if (collision.collider.gameObject.layer == 6 && !grounded && (int)currentMode!=0)
         {
             if (jumping && (Time.time - jumpStartTime > minJumpTime))
             {
@@ -363,11 +364,11 @@ public class CartMovementScript : MonoBehaviour
 
     public void Failed()
     {
+        SwitchCurrentMode(0);
         ShowCrashFailurePrompt();
         ResetCart();
-        graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(true);
-        SwitchCurrentMode(0);
         playButton.GetComponent<PlayLevelScript>().StopPlaying();
+        graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(true);       
     }
 
 }

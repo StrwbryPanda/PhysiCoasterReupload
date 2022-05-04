@@ -1199,6 +1199,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 574449755684394974, guid: a0f43aeedd6d78f448ba66eaecbc164a, type: 3}
+      propertyPath: m_text
+      value: 'What does the Law of Conservation of Energy
+
+        state?'
+      objectReference: {fileID: 0}
     - target: {fileID: 574449755689181594, guid: a0f43aeedd6d78f448ba66eaecbc164a, type: 3}
       propertyPath: m_text
       value: 'Energy can be created, but not
@@ -1803,7 +1809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413643007960, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413643007960, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1851,7 +1857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413862034804, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.8
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413862034804, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1879,7 +1885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413889862989, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413889862989, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1891,7 +1897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413929478953, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -40
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413929478953, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1979,7 +1985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413976193246, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4207183413976193246, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2019,7 +2025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207183414078107292, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4207183414078107292, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2039,7 +2045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207183414615650469, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4207183414615650469, guid: 88704192299f6034f90ad6ae10915eae, type: 3}
       propertyPath: m_LocalPosition.y
