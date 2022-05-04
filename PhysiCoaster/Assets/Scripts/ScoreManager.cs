@@ -22,10 +22,11 @@ public class ScoreManager : MonoBehaviour
     public GameObject check2;
     int bounding;
     int prevmode;
-
+    AudioSource yaySound;
     // Start is called before the first frame update
     void Start()
     {
+        yaySound = GetComponent<AudioSource>();
         graph = GameObject.Find("Line Graph Container");
         player = GameObject.Find("Cart Anchor");
         trigger1 = true;
@@ -104,6 +105,7 @@ public class ScoreManager : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             complete = true;
+            yaySound.Play();
         }
     }
     public void ReturnRun()

@@ -12,6 +12,8 @@ TagManager:
   - Graph Lines
   - End
   - Star
+  - CrashFailHitbox
+  - Fallout Boundary
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Water
   - UI
   - Rideable
-  - 
+  - FailHit
   - 
   - 
   - 

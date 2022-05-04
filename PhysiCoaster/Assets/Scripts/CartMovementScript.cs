@@ -12,8 +12,11 @@ public enum PhysicsMode
 public class CartMovementScript : MonoBehaviour
 {
     public GameObject cartBody;
+    public AudioSource failSound;
+    public AudioSource yaySound;
     GameObject stallFailurePrompt;
     GameObject crashFailurePrompt;
+    GameObject playButton;
     private Rigidbody rb;
     public Vector3 startingPosition;
     public Quaternion startingRotation;
@@ -39,6 +42,7 @@ public class CartMovementScript : MonoBehaviour
     public bool insufficientEnergyToAdvance;
     public float castDistance;
     public LayerMask mask;
+    public LayerMask failMask;
     public bool rideableSurfaceDetected;
     public bool debugging;
     public bool grounded;
@@ -50,6 +54,7 @@ public class CartMovementScript : MonoBehaviour
     
     void Awake()
     {
+        playButton = GameObject.Find("Play Level Button");
         end = GameObject.FindGameObjectWithTag("End");
         stallFailurePrompt = GameObject.Find("Stall Failure Prompt");
         stallFailurePrompt.SetActive(false);
@@ -90,6 +95,7 @@ public class CartMovementScript : MonoBehaviour
                 {
                     SwitchCurrentMode(0);
                     stallFailurePrompt.SetActive(true);
+                    PlayFailSound();
                 }
                 break;
 
@@ -122,12 +128,53 @@ public class CartMovementScript : MonoBehaviour
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hitInfo;
 
-        if(Physics.Raycast(ray, out hitInfo, castDistance, mask, QueryTriggerInteraction.Ignore)){
+        Ray failCheckRay = new Ray(transform.position, Vector3.right);
+        RaycastHit failCheckHitInfo;
+
+        if (Physics.Raycast(failCheckRay, out failCheckHitInfo, 0.25f, failMask, QueryTriggerInteraction.Ignore))
+        {
+            Debug.DrawLine(failCheckRay.origin, failCheckHitInfo.point, Color.black);
+            if(failCheckHitInfo.collider.CompareTag("CrashFailHitbox"))
+            {
+                Failed();
+                Debug.Log("Raycast hit fail hitbox.");
+            }
+        }
+        else
+        {
+            Debug.DrawLine(failCheckRay.origin, failCheckRay.origin+ (0.25f * failCheckRay.direction), Color.red);
+        }
+
+        Ray uFailCheckRay = new Ray(transform.position, Vector3.up);
+        RaycastHit uFailCheckHitInfo;
+
+        if (Physics.Raycast(uFailCheckRay, out uFailCheckHitInfo, 0.25f, failMask, QueryTriggerInteraction.Ignore))
+        {
+            Debug.DrawLine(uFailCheckRay.origin, uFailCheckHitInfo.point, Color.black);
+            if (uFailCheckHitInfo.collider.CompareTag("CrashFailHitbox"))
+            {
+                Failed();
+                Debug.Log("Raycast hit fail hitbox.");
+            }
+        }
+        else
+        {
+            Debug.DrawLine(uFailCheckRay.origin, uFailCheckRay.origin + (0.25f * uFailCheckRay.direction), Color.red);
+        }
+
+        if (Physics.Raycast(ray, out hitInfo, castDistance, mask, QueryTriggerInteraction.Ignore)){
             Debug.DrawLine(ray.origin, hitInfo.point, Color.black);
             angleOfDecline=Quaternion.FromToRotation(Vector3.up, hitInfo.normal).eulerAngles.z;
             if ((int)currentMode == 1)
             {
                 cartBody.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+            }else
+            {
+                if(hitInfo.collider.CompareTag("Fallout Boundary"))
+                {
+                    Failed();
+                    Debug.Log("Raycast hit fallout boundary.");
+                }
             }
             
             rideableSurfaceDetected = true;
@@ -238,7 +285,7 @@ public class CartMovementScript : MonoBehaviour
                     distanceTraveledThisIteration = Vector3.Distance(dHitInfo.point + new Vector3(0.0f, colliderRadius, 0.0f), priorLocation);
                     priorLocation = dHitInfo.point + new Vector3(0.0f, colliderRadius, 0.0f);
                     Debug.DrawLine(dRay.origin, dHitInfo.point, Color.black);
-                    Debug.Log("i: " + i + ", Path 1:" + distanceTraveledThisIteration);
+                    //Debug.Log("i: " + i + ", Path 1:" + distanceTraveledThisIteration);
                     remainingDistance -= distanceTraveledThisIteration;
                 }
                 else if (Physics.Raycast(uRay, out uHitInfo, castDistance, mask, QueryTriggerInteraction.Ignore))
@@ -246,7 +293,7 @@ public class CartMovementScript : MonoBehaviour
                     distanceTraveledThisIteration = Vector3.Distance(uHitInfo.point + new Vector3(0.0f, -colliderRadius, 0.0f), priorLocation);
                     priorLocation = uHitInfo.point + new Vector3(0.0f, -colliderRadius, 0.0f);
                     Debug.DrawLine(uRay.origin, uHitInfo.point, Color.black);
-                    Debug.Log("i: " + i + ", Path 2:" + distanceTraveledThisIteration);
+                    //Debug.Log("i: " + i + ", Path 2:" + distanceTraveledThisIteration);
                     remainingDistance -= distanceTraveledThisIteration;
                 }
                 else
@@ -254,13 +301,13 @@ public class CartMovementScript : MonoBehaviour
                     distanceTraveledThisIteration = Vector3.Distance(targetOrigin, priorLocation);
                     priorLocation = targetOrigin;
                     Debug.DrawLine(dRay.origin, dHitInfo.point, Color.black);
-                    Debug.Log("i: " + i + ", Path 3:" + distanceTraveledThisIteration);
+                    //Debug.Log("i: " + i + ", Path 3:" + distanceTraveledThisIteration);
                     remainingDistance -= distanceTraveledThisIteration;
                 }
 
             }
             distanceTraveledThisFrame = Vector3.Distance(transform.position, priorLocation);
-            Debug.Log("Prior Location: " + priorLocation + ", Distance Traveled This Frame: "+distanceTraveledThisFrame);
+            //Debug.Log("Prior Location: " + priorLocation + ", Distance Traveled This Frame: "+distanceTraveledThisFrame);
             transform.position = priorLocation;
         }
         
@@ -301,6 +348,26 @@ public class CartMovementScript : MonoBehaviour
     public void ShowCrashFailurePrompt()
     {
         crashFailurePrompt.SetActive(true);
+        PlayFailSound();
+    }
+
+    public void PlayYaySound()
+    {
+        yaySound.Play();
+    }
+
+    public void PlayFailSound()
+    {
+        failSound.Play();
+    }
+
+    public void Failed()
+    {
+        ShowCrashFailurePrompt();
+        ResetCart();
+        graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(true);
+        SwitchCurrentMode(0);
+        playButton.GetComponent<PlayLevelScript>().StopPlaying();
     }
 
 }
