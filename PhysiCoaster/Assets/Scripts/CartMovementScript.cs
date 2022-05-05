@@ -33,6 +33,7 @@ public class CartMovementScript : MonoBehaviour
     public Vector3 storedVelVector;
     public float distanceOverestimatedLastFrame;
     GameObject end;
+    GameObject failurePlane;
     public float bottomHeightAdj;
     public float height;
     public float potentialEnergy;
@@ -56,6 +57,7 @@ public class CartMovementScript : MonoBehaviour
     {
         playButton = GameObject.Find("Play Level Button");
         end = GameObject.FindGameObjectWithTag("End");
+        failurePlane = GameObject.Find("Fail Boundary Plane");
         stallFailurePrompt = GameObject.Find("Stall Failure Prompt");
         stallFailurePrompt.SetActive(false);
         crashFailurePrompt = GameObject.Find("Crash Failure Prompt");
@@ -68,7 +70,7 @@ public class CartMovementScript : MonoBehaviour
         mass = rb.mass;
         startingVelocity = Mathf.Sqrt(2.0f * kineticEnergy / mass);
         currentVelocity = startingVelocity;
-        height = transform.position.y - (end.gameObject.transform.position.y+bottomHeightAdj);
+        height = transform.position.y - failurePlane.transform.position.y+bottomHeightAdj;
         potentialEnergy = mass * gForce * height;
         totalEnergy = startingKE + potentialEnergy;
     }
@@ -245,7 +247,7 @@ public class CartMovementScript : MonoBehaviour
     public void UpdateEnergyLevels()
     {
 
-        height = transform.position.y - (end.gameObject.transform.position.y + bottomHeightAdj);
+        height = transform.position.y - failurePlane.gameObject.transform.position.y + bottomHeightAdj;
         potentialEnergy = mass * gForce * height;
         kineticEnergy = totalEnergy-potentialEnergy;
         currentVelocity = Mathf.Sqrt(2.0f*kineticEnergy/mass);
@@ -340,8 +342,7 @@ public class CartMovementScript : MonoBehaviour
     public void ResetCart()
     {
         graph.GetComponent<LineGraphScript>().StopRecordingAndClearData(true);
-        transform.position = startingPosition;
-        transform.rotation = startingRotation;
+        transform.SetPositionAndRotation(startingPosition, startingRotation);
         cartBody.transform.rotation = startingCartRotation;
         insufficientEnergyToAdvance = false;
     }
